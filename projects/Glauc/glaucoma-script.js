@@ -131,10 +131,10 @@ fetch('/projects/Glauc/glauc documents/Problem2.py')
 // Initialize Page
 window.addEventListener('DOMContentLoaded', function() {
     // Load all CSVs
-    loadCSV("/projects/Glauc/glauc documents/os.csv", "data-table1");
-    loadCSV("/projects/Glauc/glauc documents/od1.csv", "data-table2");
-    loadCSV("/projects/Glauc/glauc documents/od2.csv", "data-table3");
-    loadCSV("/projects/Glauc/glauc documents/od_cleaned.csv", "data-table4");
+    loadCSV("glauc documents/os.csv", "data-table1");
+    loadCSV("glauc documents/od1.csv", "data-table2");
+    loadCSV("glauc documents/od2.csv", "data-table3");
+    loadCSV("glauc documents/od_cleaned.csv", "data-table4");
 
     // Smooth Scrolling (excluding home button)
     document.querySelectorAll('nav a').forEach(anchor => {
