@@ -236,7 +236,7 @@ const controlsHTML = `
     <label for="speedSlider"> Speed: </label>
     <input type="range" id="speedSlider" min="10" max="300" value="${speed}" style="vertical-align: middle;">
     <label class="switch-toggle">
-        <input type="checkbox" id="toggleBest" checked>
+        <input type="checkbox" id="toggleBest">
         <span class="slider"></span>
         <span class="label-text">Show Best Tour</span>
     </label>
