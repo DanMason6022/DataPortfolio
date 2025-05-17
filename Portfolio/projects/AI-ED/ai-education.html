@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ethical Impact: Emotion AI in Education</title>
+  <link rel="stylesheet" href="ethics-ai-style.css" />
+  <link rel="stylesheet" href="ai-education-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav>
+    <input type="checkbox" id="nav-toggle" hidden />
+    <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
+    <ul class="nav-menu">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="#overview">Project Overview</a></li>
+      <li><a href="#overview">Intro</a></li>
+      <li><a href="#vsd">VSD</a></li>
+      <li><a href="#stakeholders">Stakeholders</a></li>
+      <li><a href="#recommendations">Recommendations</a></li>
+      <li><a href="#limitations">Limitations</a></li>
+      <li><a href="#report">Report</a></li>
+      <li><button class="go-back-button" onclick="window.history.back()">Back</button></li>
+    </ul>
+  </nav>
+
+  <header class="hero-section">
+    <h1>Ethical Impact Assessment on the use of Emotion Recognition AI in Education<</h1>
+
+  </header>
+
+  <section id="introduction" class="content-section">
+    <h2>Project Overview</h2>
+    <p>
+      This project was a submodule during my time at University, it examines the ethics of using Emotion Recognition AI (ERAI) in schools, this was my choice of topic, we were allowed to choose anything within the scope of emotion recognition ethics in ai. The goal of my hypothetical technology is to help educators track student engagement and emotions to improve teaching. While I think there is promise in the premise,  this raises key concerns around privacy, consent, and student well-being so seemed a good choice to deliberate the ethics.
+    </p>
+    <p>The project premise was that I was a consultant to the company and had to provide a report / Ethical impact Assessment on their proposed tech </p>
+    
+  </section>
+
+  <section id="vsd" class="content-section">
+    <h2>Value Sensitive Design</h2>
+    <p>
+      VSD helps design tech with human values in mind. It includes:
+    </p>
+    <ul>
+      <li><strong>Conceptual:</strong> Define core values and resolve conflicts.</li>
+      <li><strong>Empirical:</strong> Understand stakeholder needs and concerns.</li>
+      <li><strong>Technical:</strong> Build systems that support ethical priorities.</li>
+    </ul>
+    <p>
+      I identified eight guiding values:
+    </p>
+
+    <div class="data-table">
+      <table>
+        <caption>Human Values in Design</caption>
+        <thead>
+          <tr><th>Value</th><th>Definition</th><th>Implementation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Privacy</td><td>Control over personal data</td><td>Minimal data, access limits</td></tr>
+          <tr><td>Consent</td><td>Informed, voluntary participation</td><td>Clear opt-in/out options</td></tr>
+          <tr><td>Fairness</td><td>No bias or unequal treatment</td><td>Diverse datasets, audits</td></tr>
+          <tr><td>Explainability</td><td>System decisions must be understandable</td><td>Simple models, clear docs</td></tr>
+          <tr><td>Trust</td><td>Confidence in system use</td><td>Transparency, reliability</td></tr>
+          <tr><td>Autonomy</td><td>Freedom from undue influence</td><td>Opt-outs, non-coercive design</td></tr>
+          <tr><td>Accountability</td><td>Responsibility for decisions</td><td>Audit logs, grievance channels</td></tr>
+          <tr><td>Transparency</td><td>Accessible info on system actions</td><td>Open documentation</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Value Conflicts</h3>
+    <p>
+      Conflicts may arise, e.g. transparency vs. privacy. These must be contextually managed through stakeholder input and documentation.
+    </p>
+  </section>
+
+  <section id="stakeholders" class="content-section">
+    <h2>Stakeholder Analysis</h2>
+    <p>
+A central component of the ethical impact assessment is the detailed analysis of stakeholder interests, including students, teachers, parents, developers, policymakers, and educational auditors. Each group is associated with a unique set of priority values — students value privacy and fairness, parents demand transparency and explainability, and developers are tasked with ensuring fairness, accountability, and trust. Conflicts between values (such as student privacy vs. parental transparency) are acknowledged, with suggested compromises that prioritise the student’s autonomy unless serious concerns arise.    </p>
+
+    <div class="data-table">
+      <table>
+        <caption>Stakeholder Summary</caption>
+        <thead>
+          <tr><th>Stakeholder</th><th>Values</th><th>Risks</th><th>Mitigations</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Educators</td>
+            <td>Effectiveness, student support</td>
+            <td>Misuse of data, extra workload</td>
+            <td>Training, clear use guidelines</td>
+          </tr>
+          <tr>
+            <td>Students</td>
+            <td>Privacy, autonomy</td>
+            <td>Surveillance discomfort, bias</td>
+            <td>Consent, bias checks, opt-outs</td>
+          </tr>
+          <tr>
+            <td>Parents</td>
+            <td>Transparency, well-being</td>
+            <td>Lack of clarity, over-trust in tech</td>
+            <td>Regular updates, feedback loops</td>
+          </tr>
+          <tr>
+            <td>Developers</td>
+            <td>Fairness, transparency</td>
+            <td>Unintended bias, reputation risk</td>
+            <td>Ethical reviews, diverse teams</td>
+          </tr>
+          <tr>
+            <td>Policy Makers</td>
+            <td>Compliance, equity</td>
+            <td>Tech outpacing law, backlash</td>
+            <td>Regular reviews, pilot programs</td>
+          </tr>
+          <tr>
+            <td>Auditors</td>
+            <td>Accountability, safety</td>
+            <td>Limited access, conflicts of interest</td>
+            <td>Clear frameworks, oversight</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Engagement</h3>
+    <p>
+      Tailor engagement: educators need training; students need age-appropriate info; parents need transparency; developers need guidance; policymakers need collaboration.
+    </p>
+  </section>
+
+  <section id="recommendations" class="content-section">
+    <h2>Recommendations</h2>
+
+    <h3>Data & Consent</h3>
+    <ul>
+      <li>Use layered, informed consent for students and guardians.</li>
+      <li>Pseudonymize data and limit collection.</li>
+      <li>Support ongoing consent changes.</li>
+    </ul>
+
+    <h3>Bias Mitigation</h3>
+    <ul>
+      <li>Regular fairness audits using tools like AI Fairness 360.</li>
+      <li>Use representative datasets, improve them over time.</li>
+      <li>Keep human reviewers in the loop.</li>
+    </ul>
+
+    <h3>Dataset Strategy</h3>
+    <ul>
+      <li>Avoid biased public datasets. Build your own with consent.</li>
+      <li>Label data with expert input.</li>
+      <li>Track changes in expression over time via longitudinal studies.</li>
+    </ul>
+
+    <h3>Technical Implementation</h3>
+    <ul>
+      <li>Favor interpretable, transparent models.</li>
+      <li>Process data locally where possible.</li>
+      <li>Limit access and log all activity.</li>
+    </ul>
+  </section>
+
+  <section id="limitations" class="content-section">
+    <h2>Limitations</h2>
+
+    <h3>Psychological Impact</h3>
+    <ul>
+      <li>Surveillance may reduce authentic expression.</li>
+      <li>Monitoring may raise anxiety or self-consciousness.</li>
+    </ul>
+
+    <h3>Technical Constraints</h3>
+    <ul>
+      <li>Hard to detect subtle or context-specific emotions.</li>
+      <li>Systems often ignore cultural or personal nuance.</li>
+    </ul>
+
+    <h3>Social Concerns</h3>
+    <ul>
+      <li>Surveillance may become normalized.</li>
+      <li>Wealthier schools may get better tools, increasing inequality.</li>
+    </ul>
+
+    <h3>Responsible Rollout</h3>
+    <ul>
+      <li>Start with pilot programs, monitor outcomes.</li>
+      <li>Ensure stakeholders can give feedback throughout.</li>
+    </ul>
+  </section>
+
+<section id="download-report" class="content-section">
+  <h2>Full Technical Report</h2>
+
+  <!-- Desktop PDF view -->
+  <div class="pdf-viewer desktop-only">
+    <iframe src="../AI-ED/Documents/AI_ETHICS_COURSEWORK-1.pdf" width="100%" height="500px" style="border: none;"></iframe>
+  </div>
+
+  <!-- Mobile-only download button -->
+  <div class="mobile-only">
+    <a href="../AI-ED/Documents/AI_ETHICS_COURSEWORK-1.pdf" class="go-back-button" download>
+      📄 Download PDF Report
+    </a>
+  </div>
+</section>
+
+
+<footer>
+    <div class="footer-content">
+        <p>© Daniel Mason, 2024</p>
+    </div>
+</footer>
+<script src="ai-education.js"></script>
+
+</body>
+</html>

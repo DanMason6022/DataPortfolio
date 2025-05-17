@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using AI to Solve the Travelling Salesman Problem</title>
+    <link rel="stylesheet" href="travelling-salesman-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="ai-tsp-page">
+   <nav>
+    <input type="checkbox" id="nav-toggle" hidden>
+    <label for="nav-toggle" class="nav-toggle-label">&#9776; </label>
+    <ul class="nav-menu">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="#top">Top</a></li>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#algorithms">Algorithms</a></li>
+        <li><a href="#enhancements">Enhancements</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#discussion">Discussion</a></li>
+        <li><button class="go-back-button" onclick="window.history.back()">Back</button></li>
+    </ul>
+</nav>
+
+
+    <section id="top" class="hero-section">
+        <header>
+            <h1>Using AI to Solve the Travelling Salesman Problem</h1>
+        </header>
+    </section>
+
+    <section id="introduction" class="content-section">
+        <h2>Project Introduction</h2>
+        <p>This project investigates how artificial intelligence algorithms can be applied to the classic optimisation problem: the Travelling Salesman Problem (TSP). The objective is to find the shortest possible path that visits each city exactly once and returns to the starting point. This problem is a benchmark in evaluating the efficiency of heuristic and metaheuristic methods.</p>
+        <p>My approach implements two well-known optimisation techniques: the Genetic Algorithm (GA) and Ant Colony Optimization (ACO). We explore both standard implementations and enhanced versions of each, tailored to reduce runtime and improve path optimality. The algorithms were tested on a suite of ten TSP datasets, with city sizes ranging from 12 to 535 before being subejct to assessment on unseen datasets.</p>
+    </section>
+<section id="evaluation" class="content-section">
+  <h2>Marking Scheme Summary</h2>
+  <p>This project is assessed based on four primary pillars: sophistication, correctness, enhancement, and solution quality. A key aspect of sophistication is the <strong>algorithm tariff system</strong> — where more advanced algorithms carry higher expected complexity and grading expectations.</p>
+
+  <h3>Algorithm Tariffs</h3>
+  <p>Each algorithm is assigned a tariff score (1–10), reflecting its expected sophistication and challenge level:</p>
+  <ul>
+    <li><strong>GA (Genetic Algorithm)</strong> — Tariff 6</li>
+    <li><strong>ACO (Ant Colony Optimization)</strong> — Tariff 9</li>
+    <li><strong>SA (Simulated Annealing)</strong> — Tariff 5</li>
+    <li><strong>BF (Brute Force)</strong> — Tariff 6</li>
+    <li><strong>PSO (Particle Swarm Optimization)</strong> — Tariff 10</li>
+  </ul>
+  <p>Using a higher-tariff algorithm implies higher expected sophistication in both implementation and result quality. However, the trade-off is the increased complexity and risk of the algorithm being incorrect.
+  <ul>
+    <li><strong>Sophistication:</strong> Based on tariff level and implementation complexity.</li>
+    <li><strong>Correctness:</strong> Both basic algorithms must work on secret test instances.</li>
+    <li><strong>Enhancement:</strong> Assessed on originality, effectiveness, and explanation of improvements.</li>
+    <li><strong>Quality:</strong> Measured against benchmark solutions and peer performance.</li>
+  </ul>
+  <p>The algorithms were tested on ten different datasets provided in the AISearch project framework. Each file varied in complexity, with city counts from 12 up to 535. Algorithms were restricted to run for a fixed time only on the unseen datasets where they were limited to 1 minute of run time </p>
+        <p>Implementations adhered strictly to the examiners's constraints: no third-party libraries, and strict adherence to provided I/O formats. Code was written in Python and executed in a standardised environment.</p>
+        <p>Performance metrics for assesment included tour length, time to first improvement, and total convergence time. Enhanced variants were compared side-by-side with baseline versions to isolate the impact of each modification.</p>
+</section>
+
+    <section id="algorithms" class="content-section">
+        <h2>My Algorithms</h2>
+        <div class="methodology-grid">
+            <div class="methodology-item">
+                <h3>Genetic Algorithm (GA)</h3>
+                <p>GA simulates the process of natural evolution. It starts with a population of candidate solutions (tours) and uses selection, crossover, and mutation to evolve better solutions over generations. The fitness of a tour is inversely proportional to its total distance, and better tours are more likely to be chosen as parents.</p>
+            </div>
+            <div class="methodology-item">
+                <h3>Ant Colony Optimization (ACO)</h3>
+                <p>ACO is inspired by the foraging behavior of ants, which deposit pheromones on paths to communicate promising routes. Artificial ants build tours influenced by pheromone intensity and heuristic desirability (e.g., proximity). Over time, more optimal paths accumulate stronger pheromone trails, guiding future ants more effectively.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="enhancements" class="content-section">
+        <h2>Enhancements</h2>
+        <div class="feature-box">
+            <h3>GA Enhancements</h3>
+            <ul>
+                <li><strong>Fixed Start City:</strong> Always begins at city 0 to reduce permutation complexity.</li>
+                <li><strong>Ordered Crossover:</strong> Preserves contiguous city sequences from parents, improving child tour integrity.</li>
+                <li><strong>Inversion Mutation:</strong> Reverses a segment of the tour, enabling broader search dynamics and potential escape from local minima.</li>
+                <li><strong>Greedy Initialisation:</strong> Constructs initial parents using a nearest-neighbour heuristic to provide a strong genetic base.</li>
+                <li><strong>Tournament Selection:</strong> Simplified fitness comparison using shortest length, accelerating convergence.</li>
+            </ul>
+        </div>
+        <div class="feature-box">
+            <h3>ACO Enhancements</h3>
+            <ul>
+                <li><strong>Heuristic-Weighted Selection:</strong> Combines pheromone influence and nearest-neighbour bias, with emphasis on pheromones to overcome local optima.</li>
+                <li><strong>Multiple Colonies:</strong> Independent colonies share pheromone matrices periodically, fostering diversity and cross-pollination of good solutions.</li>
+                <li><strong>Dynamic Ant Population:</strong> Uses a sigmoid function to start with many ants (broad search), then reduces over time to refine around promising areas.</li>
+            </ul>
+        </div>
+    </section>
+
+    
+
+
+<section id="results" class="content-section">
+  <h2>Algorithm Animation Comparison</h2>
+  <p>This is a demonstration of my algorthims, designed to show how each performed on the 26 city dataset</p>
+  <label for="algo-select">Choose an algorithm:</label>
+  <select id="algo-select">
+    <option value="alga.json">GA Basic</option>
+    <option value="algB.json">ACO Basic</option>
+    <option value="algA_enhanced.json">GA Enhanced</option>
+    <option value="algBnb_enhanced.json">ACO Enhanced</option>
+  </select>
+  
+  <div id="tsp-flex-wrapper">
+  <div id="tsp-main">
+    <canvas id="tspCanvas" width="600" height="600"></canvas>
+    <p id="info"></p>
+  </div>
+
+</div>
+
+  
+  
+ <div id="results-table-container">
+  <h3>Final Results (26-City Dataset)</h3>
+  <p class="runtime-note">Each algorithm was run for <strong>60 seconds</strong>. “Time to Convergence” shows when the best tour was first found.</p>
+
+  <table id="results-table">
+    <thead>
+      <tr>
+        <th>Algorithm</th>
+        <th>Version</th>
+        <th>Best Tour Length</th>
+        <th>Time to Convergence (s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GA</td>
+        <td>Basic</td>
+        <td>1571</td>
+        <td>5.23</td>
+      </tr>
+      <tr>
+        <td>GA</td>
+        <td>Enhanced</td>
+        <td>1531</td>
+        <td>0.40</td>
+      </tr>
+      <tr>
+        <td>ACO</td>
+        <td>Basic</td>
+        <td>2043</td>
+        <td>5.28</td>
+      </tr>
+      <tr>
+        <td>ACO</td>
+        <td>Enhanced (BNB)</td>
+        <td>1710</td>
+        <td>7.91</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p> We can tell a lot from this data, for instance all of the algorithms converge to their best tour within 8 seconds!! Potentially meaning I didn't offer intense enough mutation in order to escape local minima, or that it wasn't optimised enough to work within a minute!
+</p>
+<p>The enhanced Ant Colony Optimization (ACO) algorithm produced a significantly higher number of snapshots compared to the basic implementation.
+
+This difference reflects the underlying improvements in the enhanced version, not just in quality but also in its search behavior:
+<ul><li>Multiple independent colonies operate in parallel, each exploring the solution space separately. This increases the chance of finding new best tours in the same time window.</li>
+
+    <li>Dynamic ant population driven by a sigmoid function frontloads exploration. More ants early on increases path diversity and reduces early stagnation.</li>
+
+    <li>Heuristic-informed decision making (combining pheromone and distance) allows ants to more effectively balance exploitation and exploration.</li>
+
+    <li>Sharper decision bias via squared pheromone weighting (pheromone²) amplifies learned paths while still allowing for controlled randomness.</li>
+
+    <li>Periodic information sharing between colonies (every 10 seconds) encourages long-term convergence without sacrificing early diversity.</li>
+</ul>
+    
+
+These mechanisms result in a more gradual and incremental improvement pattern, where the best tour is updated frequently. Each improvement triggers a snapshot, which explains the increased snapshot count.</p>
+</section>
+
+<section id="comparison" class="content-section">
+  <h2>Performance Comparison: GA vs ACO</h2>
+  <p>This table compares the tour lengths and runtimes of the Genetic Algorithm (AlgA) and Ant Colony Optimization (AlgB) across all 10 datasets.</p>
+  <div class="data-table">
+    <table class="full-width-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Cities</th>
+          <th>GA Tour</th>
+          <th>ACO Tour</th>
+          <th>GA Time (s)</th>
+          <th>ACO Time (s)</th>
+          <th>Best</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>AISearchfile012</td><td>12</td><td>56</td><td>56</td><td>300.5</td><td>2100.0</td><td>🎯 Equal</td></tr>
+        <tr><td>AISearchfile017</td><td>17</td><td>1533</td><td>1444</td><td>3600.9</td><td>2100.2</td><td>🐜 ACO</td></tr>
+        <tr><td>AISearchfile021</td><td>21</td><td>2716</td><td>2691</td><td>3600.7</td><td>29409.3</td><td>🐜 ACO</td></tr>
+        <tr><td>AISearchfile026</td><td>26</td><td>1473</td><td>1716</td><td>3601.0</td><td>2100.5</td><td>🧬 GA</td></tr>
+        <tr><td>AISearchfile042</td><td>42</td><td>1270</td><td>1418</td><td>3601.8</td><td>2100.1</td><td>🧬 GA</td></tr>
+        <tr><td>AISearchfile048</td><td>48</td><td>13476</td><td>13125</td><td>3602.0</td><td>2100.6</td><td>🐜 ACO</td></tr>
+        <tr><td>AISearchfile058</td><td>58</td><td>26112</td><td>26203</td><td>22167.3</td><td>2100.2</td><td>🧬 GA</td></tr>
+        <tr><td>AISearchfile175</td><td>175</td><td>21582</td><td>21726</td><td>3610.5</td><td>2102.1</td><td>🧬 GA</td></tr>
+        <tr><td>AISearchfile180</td><td>180</td><td>2220</td><td>4500</td><td>3606.0</td><td>2110.4</td><td>🧬 GA</td></tr>
+        <tr><td>AISearchfile535</td><td>535</td><td>49993</td><td>49887</td><td>3617.6</td><td>2114.3</td><td>🐜 ACO</td></tr>
+      </tbody>
+    </table>
+    <p class="runtime-note"><strong>Note:</strong>These are the very best routes that were returned during my time running the algorithms, this is from either the basic or enhanced version of the algorithm. Please be aware runtime values were manually capped and varied across instances. Longer time limits were applied intentionally to explore convergence behavior and escape local minima however this does make the comparisons slightly unfair in these circumstances.</p>
+
+  </div>
+</section>
+
+<aside id="tsp-legend" class="legend-box floating-key">
+  <h3>Animation Key</h3>
+  <ul>
+    <li><span class="legend-color" style="background-color: #8c1e7f"></span> Current tour path</li>
+    <li><span class="legend-color" style="background-color: #547aa5;"></span> Best tour found</li>
+    <li><span class="legend-line"></span> Changed edges (delta)</li>
+    <li><span class="legend-dot"></span> City node (with label)</li>
+    <li><span class="legend-chart"></span> Tour length chart</li>
+  </ul>
+</aside>
+
+
+<section id="discussion" class="content-section">
+  <h2>Algorithm Behavior & Runtime Interpretation</h2>
+  <p>Although tour quality is the primary comparison metric in this project, it's important to acknowledge the differing runtime budgets between algorithms. The Genetic Algorithm (GA) was consistently allocated up to <strong>3600 seconds</strong> per run, while the Ant Colony Optimization (ACO) implementation typically used a cap of <strong>2100 seconds</strong>.</p>
+
+  <p>This runtime difference arose primarily from experimentation and refinement cycles. The ACO algorithm was observed to converge faster in most cases, and limiting its time allowed for broader exploration of parameter settings without overly long testing phases. However, some selected runs were extended (e.g. to 8+ hours) to observe whether ACO could escape local optima given more time.</p>
+
+  <h3>Key Observations</h3>
+  <ul>
+    <li><strong>GA (AlgA)</strong> ran with a 3600s cap and improved gradually over time.</li>
+    <li><strong>ACO (AlgB)</strong> was mostly capped at 2100s, relying on early convergence and multiple colony dynamics.</li>
+    <li>Despite having less time, ACO often matched or outperformed GA on small and select large datasets.</li>
+    <li>GA remained more consistent under longer runs, especially on medium-to-large instances.</li>
+  </ul>
+
+  <p>These runtime variations do not undermine the validity of the comparison, since the focus is on solution quality. Instead, they offer valuable insights into each algorithm's efficiency and behavior under different constraints.</p>
+
+  <h3>Future Work</h3>
+  <p>Several avenues for further development remain:</p>
+  <ul>
+    <li>Hybridising GA and ACO to combine exploration and exploitation dynamics.</li>
+    <li>Incorporating local search refinement (e.g. 2-opt) for final tour polishing.</li>
+    <li>Adding adaptive time allocation based on live convergence tracking.</li>
+    <li>Parallelising ACO colonies or porting computation to GPUs for scalability.</li>
+  </ul>
+</section>
+
+
+
+ 
+
+    <footer>
+        <div class="footer-content">
+            <p>© Daniel Mason, 2024</p>
+        </div>
+    </footer>
+
+    <script src="travelling-salesman.js"></script>
+
+</body>
+</html>
