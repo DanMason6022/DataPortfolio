@@ -352,3 +352,21 @@ document.querySelectorAll('.nav-menu a, .nav-menu button').forEach(link => {
     document.getElementById('nav-toggle').checked = false;
   });
 });
+
+
+function goBackOnSite() {
+  const referrer = document.referrer;
+  const currentHost = window.location.host;
+
+  try {
+    if (referrer && new URL(referrer).host === currentHost) {
+      window.history.back();
+    } else {
+      window.location.href = '/index.html'; // adjust if hosted in subfolder
+    }
+  } catch (e) {
+    window.location.href = '/index.html';
+  }
+}
+
+
