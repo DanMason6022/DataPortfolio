@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glaucoma Patients Project</title>
+    <link rel="stylesheet" href="glaucoma-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body class="glaucoma-page">
+
+<nav>
+  <input type="checkbox" id="nav-toggle" hidden>
+  <label for="nav-toggle" class="nav-toggle-label">&#9776; </label>
+  <ul class="nav-menu">
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="#top">Top</a></li>
+    <li><a href="#project-intro">Project Intro</a></li>
+    <li><a href="#csv-data">Datasets</a></li>
+    <li><a href="#data-cleaning">Data Handling</a></li>
+    <li><a href="#findings">Findings</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#download-report">View Full Report</a></li>
+    <li><button class="go-back-button" onclick="window.history.back()">Back</button></li>
+  </ul>
+</nav>
+
+
+
+    <main>
+        <!-- Header Section -->
+        <section id="top" class="hero-section">
+            <header>                
+                <h1>Glaucoma Patients Data Cleaning & Analysis</h1>
+            </header>            
+        </section>
+
+        <!-- Project Overview -->
+        <section id="project-intro" class="content-section">
+            <h2>Project Introduction</h2>
+            <p>This project was my earliest introduction to data, back in December 2022! The project was part of a second year computer science module I studied called
+                <a href="https://apps.dur.ac.uk/faculty.handbook/2022/UG/module/COMP2271" target="_blank">'data science'</a>. It wasn't until this year (2025) however, that I appreciated all I had learnt during this course as it
+                had built a foundational knowledge of spreadsheets and the principles of data analysis that greatly accelerated my understanding when I returned to the field. The concept of the project was incredibly
+                interesting, it was the first time I felt as thought the work I was doing and the skills I was learning could have direct utility in the real world - an exciting prospect.
+            </p>
+            <p>
+                The task given was open ended in nature, we were provided 3 datasets, One labeled OS, oculus sinister or left eye for those of us that don't frequent in latin and the other two labeled OD1
+                and OD2  (oculus dexter) respectively, which, you guessed it, means right eye. The OS dataset provided was an exemplar in terms of formatting, it was provided as the target to achieve
+                whilst the OD datasets were the working sets. The goal was to first merge the two OD sets and then clean all the available data before trying to decipher some insights into the relationships
+                between the diagnoses of glaucoma and the measured patient parameters.
+            </p>
+            
+            <h3>The Dataset</h3>
+            <p>Three datasets were provided:</p>
+            <ul>
+                <li><strong>OS</strong> (oculus sinister/left eye) - Well-formatted exemplar</li>
+                <li><strong>OD1 & OD2</strong> (oculus dexter/right eye) - Required cleaning</li>
+            </ul>
+        </section>
+
+        <!-- Data Tables -->
+        <section id="csv-data" class="content-section">
+            <h2>Original Datasets</h2>
+            <div class="csv-container">
+                <div class="csv-table">
+                    <h3>OS Dataset
+                        <span class="table-controls">
+                            <button class="download-btn" data-table="data-table1" data-name="OS Data">Download CSV</button>
+                        </span>
+                    </h3>
+                    <div class="table-wrapper">
+                        <table id="data-table1">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="csv-table">
+                    <h3>OD1 Dataset 
+                        <span class="table-controls">
+                            <button class="download-btn" data-table="data-table2" data-name="OD1 Data">Download CSV</button>
+                        </span>
+                    </h3>
+                
+                    <div class="table-wrapper">
+                        <table id="data-table2">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="csv-table">
+                    <h3>OD2 Dataset 
+                        <span class="table-controls">
+                            <button class="download-btn" data-table="data-table3" data-name="OD2 Data">Download CSV</button>
+                        </span>
+                    </h3>
+                    <div class="table-wrapper">
+                        <table id="data-table3">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Cleaning -->
+        <section id="data-cleaning" class="content-section">
+            <h2>Data Merging and Cleaning Process</h2>
+            <p>This project was a long time before my exposure to SQL as such all the work I did to manage my data was in Python, specifically I made a lot of use of the <strong>Pandas</strong> and
+                <strong>Openpyxl</strong> libraries. The two files were loaded and merged using common columns, ensuring that the data from both sources aligned accurately. This allowed for a consolidated
+                 dataset that incorporated information from both files into one unified format. The merge was done based on shared identifiers, ensuring that
+                 the relationship between the data points was maintained correctly. <strong>My first inner join! Though I didn't know it at the time.</strong>
+                 After merging, the dataset was sorted by ascending ID value to maintain an organized order. This sorting was particularly important for consistency in the data structure.
+                 Additionally, the columns were rearranged to match the format of the OS file. This adjustment was necessary to align
+                 the merged dataset with the requirements of the project. The final consolidated dataset was saved as 'od.xlsx' and formatted using openpyxl
+                 to match the aesthetic and structure of the OS file. This included borders and making font styles bold where necessary.</p>
+            <p>During the data cleaning process, I noticed inconsistencies in the diagnosis column, particularly with spelling errors. These errors
+                were identified by inspecting unique values in the diagnosis column. A significant portion of these inconsistencies was resolved by
+            standardising the case of entries i.e. lowrercasing everything in the column. For the remaining anomalies a spell map was created to correct
+        obvious misspellings while null values were omitted from the dataset</p>
+        <p>After addressing all categorical fields and the potential for spelling errors, i focused on quantitative data, if a row contained a null value
+            in a vital field e.g. any of the refractive_defects like dioptre or astigmatism, all data relative to that patient ID was omitted from both the OS and OD datasets as a result of this the sample size was reduced
+</p>
+            
+
+            <h3>TL;DR</h3>
+            <p>The cleaning process involved:</p>
+            <ol>
+                <li>Merging OD datasets using Pandas</li>
+                <li>Standardizing categorical values</li>
+                <li>Handling missing data</li>
+                <li>Removing outliers (3σ threshold)</li>
+            </ol>
+
+            <div class="csv-table">
+                <h3>Cleaned OD Dataset</h3>
+                <div class="table-wrapper">
+                    <table id="data-table4">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <button id="toggle-code" class="toggle-button">Show Cleaning Code</button>
+                <div id="code-container" class="code-notebook" style="display: none;">
+                    <pre><code id="python-code"></code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Findings -->
+        <section id="findings" class="content-section">
+            <h2>Key Findings</h2>
+            
+            <div class="finding">
+                <h3>1. Age and Diagnosis</h3>
+                <p>Glaucoma risk increases significantly with age:</p>
+                <div class="figure-container">
+                    <figure>
+                        <img src="Glauc images/OD age comp.png" alt="Age distribution">
+                        <figcaption>Age distribution across diagnoses</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="Glauc images/OD Comp graph.png" alt="Diagnosis by age">
+                        <figcaption>Diagnosis frequency by age group</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Additional findings sections... -->
+             <!-- Finding 2: Gender and Diagnosis -->
+            <div class="finding">
+                <h3>2. Gender and Diagnosis</h3>
+                <p>The analysis reveals a gender disparity in glaucoma diagnoses:</p>
+                <ul>
+                    <li>A higher proportion of females visit the clinic, showing a tendency to have glaucoma.</li>
+                    <li>However, when suspicious cases are included, males exhibit a higher overall risk.</li>
+                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Gender</th>
+                            <th>Glaucoma</th>
+                            <th>Suspicious</th>
+                            <th>Healthy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Male</td>
+                            <td>9</td>
+                            <td>12</td>
+                            <td>49</td>
+                        </tr>
+                        <tr>
+                            <td>Female</td>
+                            <td>17</td>
+                            <td>8</td>
+                            <td>93</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="single-figure">
+                    <figure>
+                        <img src="Glauc images/OD gender Comp.png" alt="Gender Comparison Graph" />
+                    </figure>
+                </div>    
+            </div>
+
+
+            <!-- Finding 3: Lens Status and Diagnosis -->
+            <div>
+                <h3>3. Lens Status and Diagnosis</h3>
+                <p>Patients with the crystalline lens removed demonstrated a higher tendency for glaucoma:</p>
+                <ul>
+                    <li>Nearly <strong>30%</strong> were found to be suspicious or confirmed for glaucoma without the lens.</li>
+                    <li>In contrast, only <strong>18%</strong> of patients with the lens exhibited similar diagnoses.</li>
+                </ul>
+                <figure>
+                    <img src="Glauc images/OD phakic_psuedophakic comp.png" alt="Phakic/Psuedophakic Comparison Graph" />
+                </figure>
+            </div>
+
+
+            <!-- Finding 4: Axial Length -->
+            <div>
+                <h3>4. Axial Length</h3>
+                <p>A notable correlation was observed between axial length and diagnosis:</p>
+                <ul>
+                    <li>Most glaucoma patients had an axial length under <strong>24mm</strong>.</li>
+                    <li>Nearly <strong>95%</strong> of all suspicious or glaucoma patients had an axial length under <strong>25mm</strong>, suggesting a potential causal relationship.</li>
+                </ul>
+                <figure>
+                    <img src="Glauc images/Axial lenght comp.png" alt="Axial Length Comparison Graph" />
+                </figure>
+            </div>
+            <div>
+                <h3>5. Bell Curves for fun</h3>
+                <p>The distribution chart below shows a similar pattern between the diagnoses for both males and females at each age group </p>
+                <figure>
+                    <img src="Glauc images/Age Dist OD.png" alt="Axial Length Comparison Graph" />
+                </figure>
+            </div>
+
+        </section>
+        <!-- Conclusion Section -->
+        <section id="conclusion" class="content-section">
+            <header>
+                <h2>Conclusion</h2>
+            </header>
+           
+            <p>In summary, age, gender, the presence of crystalline lenses, and axial length are critical factors in glaucoma diagnosis. These findings highlight the need for targeted screening based on these factors. However, further research and a larger sample size are essential to fully understand these relationships and improve diagnostic accuracy as well as finding a potential causality of glaucioma.</p>
+        </section>
+
+        <!-- Report -->
+        <section id="download-report" class="content-section">
+  <h2>Full Technical Report</h2>
+
+  <!-- Desktop PDF view -->
+  <div class="pdf-viewer desktop-only">
+    <iframe src="../Glauc/glauc_documents/datacleaningreport.pdf" width="100%" height="500px" style="border: none;"></iframe>
+  </div>
+
+  <!-- Mobile-only download button -->
+  <div class="mobile-only">
+    <a href="../Glauc/glauc_documents/datacleaningreport.pdf" class="go-back-button" download>
+      📄 Download PDF Report
+    </a>
+  </div>
+</section>
+
+    </main>
+
+    <footer>
+        <p>© Daniel Mason, 2024</p>
+    </footer>
+
+    <script src="glaucoma-script.js"></script>
+</body>
+</html>
