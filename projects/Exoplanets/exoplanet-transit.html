@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Jupiter HAT-P-32b Analysis</title>
+    <link rel="stylesheet" href="exoplanet-transit-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="astronomy-page">
+    <nav>
+        <input type="checkbox" id="nav-toggle" hidden>
+        <label for="nav-toggle" class="nav-toggle-label">&#9776; </label>
+        <ul class="nav-menu">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="#top">Top</a></li>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#methodology">Project Overview</a></li>
+            <li><a href="#analysis">Analysis</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#habitability">Habitability</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+            <li><a href="#download-report">View Full Report</a></li>
+            <li><button class="go-back-button" onclick="window.history.back()">Back</button></li>
+        </ul>
+    </nav>
+
+    <section id="top" class="hero-section">
+        <header>
+            <h1>Analysis of the Hot Jupiter HAT-P-32b and Planetary System of the F-Type Star HAT-P-32</h1>
+        </header>
+    </section>
+
+    <section id="introduction" class="content-section">
+        <h2>Project Introduction</h2>
+        <p>This project marked my first hands-on experience with observational astronomy and exoplanet detection. Using Durham University's Far-East-20 telescope, I, along with my Lab partner were tasked with the open ended task of investigating an exoplanet in transit.</p>
+
+        <h3>Intro to Exoplanets</h3>
+        <p>Exoplanets are planets that exist outside our solar system, most of which orbit a star. The study of exoplanets is growing rapidly and brings together many areas of science, such as astronomy, planetary physics, and astrobiology. This field helps us understand how planetary systems form and evolve. Scientists also study the habitable zones around stars to see if exoplanets might support life. If life exists, it could be similar to simple organisms on Earth, like chemotrophs, which might get energy from chemicals in their environment</p>
+        <p>People have wondered about planets beyond our solar system for centuries. In the 16th century, Giordano Bruno suggested that stars might be like our Sun, each with its own planet. However, exoplanets were only confirmed in 1992 with the use of the radial velocity method. This technique detects small changes in a star's light caused by the gravity of an orbiting planet. These changes are seen as shifts in the star's light spectrum, known as Doppler shifts. The first confirmed exoplanet around a main sequence star was found by Mayor and Queloz in 1995. As of March 30, 2024, scientists have confirmed 5,602 exoplanets and identified 10,157 more as possible candidates.</p>
+        <div class="hero-image">
+            <figure> <img src="../Exoplanets/Images/exo_dischist(1).png" alt="Exoplanet discovery timeline">
+            <figcaption>Figure 1: A timeline of Exoplanet discovery</figcaption>
+        </figure>
+        </div>
+    </section>
+
+    <section id="methodology" class="content-section">
+        <h2>Project Overview</h2>
+        <p>
+        This project focuses on the exoplanet HAT-P-32b, a gas giant orbiting the F-type star HAT-P-32, using observational data we collected. By monitoring changes in the star's brightness — a method known as transit photometry, we can extract several fundamental parameters. These include the <strong>planet-to-star radius ratio</strong>, the <strong>orbital distance</strong>, and the <strong>orbital period</strong> — knowing these, we can infer key characteristics of both the planet and its host star
+        </p>
+        <div class="methodology-grid">
+            <div class="methodology-item">
+                <h3>Telescope Setup</h3>
+                <ul>
+                    <li><strong>Aperture:</strong> 50cm</li>
+                    <li><strong>Camera:</strong> Moravian C4-1600</li>
+                    <li><strong>Mount:</strong> 10-micron GM3000 for precise tracking</li>
+                    <li><strong>Filters:</strong> V-band primary observation (966 images at 30s exposure)</li>
+                </ul>
+            </div>
+
+            <div class="methodology-item">
+                <h3>Data Processing Pipeline</h3>
+                <ol>
+                    <li><strong>Preprocessing:</strong> Dark frame subtraction and flat field correction</li>
+                    <li><strong>Photometry:</strong> Aperture photometry with optimal 5 arcsecond aperture</li>
+                    <li><strong>Light Curve:</strong> Normalized flux plotted against time</li>
+                    <li><strong>Model Fitting:</strong> Quadratic limb darkening model with MCMC parameter estimation</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="image-gallery">
+            <figure>
+                <img src="../Exoplanets/Images/deepfield.png" alt="HAT-P-32 deepfield image">
+                <figcaption>Figure 2: Deepfield color image of HAT-P-32 captured January 15<sup>th</sup> 2024</figcaption>
+            </figure>
+            <figure>
+                <img src="../Exoplanets/Images/transit diagram 2.png" alt="Transit method diagram">
+                <figcaption>Figure 3: The transit method - measuring brightness dips as the planet crosses its host star</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section id="analysis" class="content-section">
+        <h2>Detailed Analysis</h2>
+        <ol>
+    <li>
+        <strong>Preprocessing:</strong> Raw image data underwent standard CCD calibration, including <em>dark frame subtraction</em> to remove thermal noise and <em>flat field correction</em> to compensate for pixel sensitivity variations and optical vignetting. Master calibration frames were constructed from median-combined darks and flats taken during the same observing session.
+    </li>
+    <li>
+        <strong>Photometry:</strong> Aperture photometry was applied to each calibrated image using a range of aperture radii to evaluate signal-to-noise ratios. A 5 arcsecond aperture was found to minimize photometric error (0.0042 mag). Multiple comparison stars with stable magnitudes were selected for differential photometry, allowing for the correction of atmospheric transparency variations and instrumental drift.
+    </li>
+    <li>
+        <strong>Light Curve Construction:</strong> The normalized flux of HAT-P-32 was plotted against time, producing a light curve that captured the transit event. Data points were binned to reduce scatter and enhance visibility of the transit signature. Outliers were identified and removed using a sigma-clipping algorithm with a 3σ threshold.
+    </li>
+    <li>
+        <strong>Transit Model Fitting:</strong> A quadratic limb darkening transit model was fitted to the light curve using the <code>PyTransit</code> library. Key transit parameters — radius ratio (k), semi-major axis in stellar radii (a/R<sub>*</sub>), orbital inclination (i), and mid-transit time (t<sub>0</sub>) — were investigated by conducted an exploratory analysis of the key parame-
+        ters and their influence on a surrogate light curve, then tom optimise the parameters for the actual light curve we used Markov Chain Monte Carlo (MCMC) sampling with 30 walkers and 100,000 steps. Limb darkening coefficients were fixed using theoretical values from Claret & Bloemen (2011) tables for F-type stars.
+    </li>
+</ol>        
+<div class="analysis-container">
+    <div>
+        <figure>
+            <img src="../Exoplanets/Images/Light curve variable change.png" alt="MCMC parameter exploration">
+            <figcaption>Figure 4: Effects of varying key parameters on transit model</figcaption>
+        </figure>
+    </div>
+    <div>
+        <figure>
+            <img src="../Exoplanets/Images/VARYING P .png" alt="MCMC parameter exploration">
+            <figcaption>Figure 5: Effects of varying the orbital period and semi makor axis  parameters on transit model</figcaption>
+        </figure>
+    </div>
+        <div>
+            <figure>
+            <img src="../Exoplanets/Images/CONTOURS.png" alt="MCMC parameter exploration">
+            <figcaption>Figure 6: Contour plots displaying the covariance between pairs of parameters (k, t0, p, a, i)</figcaption>
+        </figure>
+    </div>
+</div>
+    <h3>Our optimal parameters:</h3>
+            <table class="full-width-table">
+                <caption>Comparison of MCMC-Derived Parameters for HAT-P-32b</caption>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Units</th>
+                        <th>Most Likely Value</th>
+                        <th>Mean ± Error</th>
+                    </tr>
+                </thead>
+            <tbody>
+                <tr>
+                    <td>k (Radius Ratio)</td>
+                    <td>N/A</td>
+                    <td>0.1356</td>
+                    <td>0.136 ± 0.002</td>
+                </tr>
+                <tr>
+                    <td>t<sub>0</sub> (Mid-Transit Time)</td>
+                    <td>hours</td>
+                    <td>1.987</td>
+                    <td>1.99 ± 0.02</td>
+                </tr>
+                <tr>
+                    <td>p (Orbital Period)</td>
+                    <td>hours</td>
+                    <td>24.846</td>
+                    <td>34 ± 19</td>
+                </tr>
+                <tr>
+                    <td>a (Semi-Major Axis)</td>
+                    <td>R<sub>*</sub></td>
+                    <td>3.07</td>
+                    <td>4.2 ± 2.3</td>
+                </tr>
+                <tr>
+                    <td>i (Inclination)</td>
+                    <td>radians</td>
+                    <td>1.55</td>
+                    <td>1.57 ± 0.07</td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+<section id = "Next steps" class="content-section">
+    <h2>Analysis next steps</h2>
+        <p>After running the MCMC analysis, we used the resulting parameter distributions to estimate the mass of HAT-P-32b. This was done by applying Kepler's third law to our values of the orbital period (P) and the semi-major axis (a). From that, we calculated a mean planetary mass and its uncertainty (standard deviation).
+            However, our results showed a major issue: P and a are strongly correlated in transit-only observations. This means that when one changes, the other must also change to keep the model fitting correctly — which makes it hard to nail down the planet's actual mass accurately.
+        </p>
+        <p>Why did this happnen??</p>
+            <p>Because the transit method can't measure the planet's speed or actual motion — just the dip in light. That's where the radial velocity method is better: it directly observes the star's motion due to the planet's gravity and can more reliably calculate both P and a, and thus the mass.
+            We compared our findings with published values from Hartman et al. (2011) — who used radial velocity data. The comparison is shown in the Table below.            </p>
+            </p>
+            <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Unit</th>
+                    <th>This Work (Transit Only)</th>
+                    <th>Hartman et al. (2011)<br>(Transit + Radial Velocity)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Orbital Period </td>
+                    <td>Days</td>
+                    <td>1.4 ± 0.8</td>
+                    <td>2.150008 ± 0.000001</td>
+                </tr>
+                <tr>
+                    <td>Semi-Major Axis</td>
+                    <td>AU</td>
+                    <td>0.022 ± 0.012</td>
+                    <td>0.0343 ± 0.0004</td>
+                </tr>
+                <tr>
+                    <td>Planetary Mass </td>
+                    <td>M<sub>J</sub></td>
+                    <td>2.4 ± 2.8</td>
+                    <td>0.860 ± 0.164</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="analysis-container">
+            <div>   
+                <figure>
+                    <img src="../Exoplanets/Images/light curve better.png" alt="MCMC parameter exploration">
+                    <figcaption>Figure 5: An experimental model of the light curve incorporating the parameters p and a as provided by Hartman et al.</figcaption>
+                </figure>
+            </div> 
+        </div>
+    </section>
+
+        <section id="results" class="content-section">
+            <h2>Results</h2>
+            <p>        Using both our best-fit parameters from the transit model and incorporating the troubolsome parameter values provided by Hartman et al  we were able to calculate key physical characteristics of both the host star and its orbiting planet, HAT-P-32b. These calculations rely on standard astrophysical relationships, such as Kepler's third law and mass–radius relations, combined with our model parameters like orbital period, radius ratio, and inclination.</p>
+            <div class="key-facts">
+            <div class="fact-box">
+                <h3>Calculated Stellar Parameters</h3>
+                <ul>
+                    <li><strong>Type:</strong> Late F / Early G class</li>
+                    <li><strong>Mass:</strong> 1.2 ± 0.2 M<sub>☉</sub></li>
+                    <li><strong>Temperature:</strong> 6170 ± 450 K</li>
+                    <li><strong>Age:</strong> 2.7 ± 0.8 Gyr</li>
+                    <li><strong>Luminosity:</strong> 2.35 ± 0.09 L<sub>☉</sub></li>
+                </ul>
+            </div>
+            <div class="fact-box">
+                <h3>Calculated Planetary Parameters</h3>
+                <ul>
+                    <li><strong>Type:</strong> Hot Jupiter</li>
+                    <li><strong>Mass:</strong> 2.4 ± 1.4 M<sub>J</sub></li>
+                    <li><strong>Radius:</strong> 1.8 ± 0.3 R<sub>J</sub></li>
+                    <li><strong>Orbit:</strong> 1.4 ± 0.8 days</li>
+                    <li><strong>Temperature:</strong> 1560 ± 190 K</li>
+                </ul>
+            </div>
+            </div>
+    </section>
+        
+
+<section id="habitability" class="content-section">
+    <h2>Habitability Analysis</h2>
+    <h3>Planetary Condition</h3>
+        <p>
+    To estimate the temperature of HAT-P-32b, we used a common formula for planetary equilibrium temperature. This calculation assumes the planet reflects about 50% of the incoming starlight (based on Jupiter's reflectivity, or Bond albedo A = 0.503). Using this, we calculated the planet's effective temperature to be approximately <strong>1560 K</strong>.
+</p>
+
+<p>
+    Next, we estimated the planet's atmospheric escape by calculating its <strong>escape velocity</strong> — the speed needed for gas molecules to leave the planet's gravity. For HAT-P-32b, this was around <strong>42 ± 2 km/s</strong>. Whether gases escape depends on their thermal speed, which we calculated using the <strong>Maxwell–Boltzmann distribution</strong>. If a gas's average speed is more than one-tenth of the escape velocity, it's likely to leak into space over time.
+</p>
+
+<p>
+    The model shows that both <strong>hydrogen and helium</strong> — the lightest gases — have parts of their speed distributions exceeding this threshold. This means the planet is likely losing these gases continuously, a process called <strong>photoevaporation</strong>. Over billions of years, this could lead to major mass loss. Some studies (e.g. Czesla et al., 2022) suggest the planet may have already lost over half its original mass.
+</p>
+
+<p>
+    Because HAT-P-32b is so close to its star, it also experiences <strong>extreme tidal forces</strong>, around <strong>10²⁷ N</strong> — about 200 million times stronger than Earth's tides from the Sun. This likely causes strong <strong>tidal heating</strong> inside the planet and contributes to violent weather. The planet is probably <strong>tidally locked</strong>, always showing the same face to the star. This could cause a huge temperature difference between the day and night sides, creating <strong>extremely fast winds and massive storms</strong>, possibly faster than the speed of sound.
+</p>
+
+        <div class="habitability-image">
+            <figure>
+                <img src="../Exoplanets/Images/gas distribution hatp.png" alt="Habitable zone comparison">
+                <figcaption>Figure 11: Comparison of HAT-P-32 system to our solar system</figcaption>
+            </figure>
+        </div>
+
+    <h3>Habitable Zone</h3>
+
+        <p>
+    The <strong>habitable zone (HZ)</strong> of a star is the region around it where conditions might allow liquid water to exist on a planet's surface — a key ingredient for life as we know it. This concept assumes the planet is Earth-like, with an atmosphere made of CO<sub>2</sub>, H<sub>2</sub>O, and N<sub>2</sub>, and is orbiting a main sequence star.
+</p>
+
+<p> The inner and outer edges of the HZ are usually defined by two main limits:
+    <ul>
+        <li><strong>Runaway Greenhouse Limit:</strong> Where a planet gets so much heat that its water evaporates and escapes into space.</li>
+        <li><strong>Maximum Greenhouse Limit:</strong> Where a planet with a thick CO<sub>2</sub> atmosphere can just barely stay warm enough to avoid freezing over.</li>
+    </ul>
+    These are considered the <strong>conservative</strong> boundaries of the habitable zone.
+</p>
+
+<p>
+    A more <strong>optimistic range</strong> includes the distance where Venus might have just started to become uninhabitable (<em>Recent Venus</em>), and the range where early Mars may have supported liquid water (<em>Early Mars</em>), before losing its atmosphere.
+</p>
+
+<p>
+    The position of these boundaries depends on the star's temperature and luminosity. Using formulas adapted from Kasting et al. (1993) and Ramirez (2018), we calculated that HAT-P-32b receives about <strong>2000 times</strong> the solar energy Earth receives — far beyond even the inner edge of the habitable zone.
+</p>
+
+<div class="equation-block">
+    T<sup>*</sup> = T<sub>eff</sub> − 5780<br>
+    S<sub>eff</sub> = S<sub>sun</sub> + aT<sup>*</sup> + bT<sup>*2</sup> + cT<sup>*3</sup> + dT<sup>*4</sup><br>
+    d = √(L<sub>*</sub> / S<sub>eff</sub>)
+</div>
+
+<p>
+    Using these calculations, we plotted the relationship between stellar temperature and the range of distances where habitable planets could exist. HAT-P-32b, however, is located extremely close to its star — about <strong>11 times closer</strong> than Mercury is to the Sun — and well outside the zone where liquid water could survive. Therefore, it is highly unlikely that HAT-P-32b could support life.
+</p>
+
+<div class="image-container">
+    <figure>
+        <img src="../Exoplanets/Images/Habit.png" alt="Habitable zone comparison">
+        <figcaption>Figure 11: (a) Comparison of HAT-P-32's planetary system and our solar system. (b) Effective stellar flux vs. temperature for different habitable zone boundaries.</figcaption>
+    </figure>
+</div>
+</section>
+
+<section id="conclusion" class="content-section">
+    <h2>Conclusion & Future Work</h2>
+    
+    <div class="conclusion-content">
+        <div class="conclusion-text">
+            <h3>Conclusion and points of discussion</h3>
+                <p>
+    This investigation focused on the exoplanet HAT-P-32b and its host star, using the transit method to determine their physical properties and orbital relationship. We also assessed the system's habitability and concluded that HAT-P-32b orbits far too close to its star to support life.
+</p>
+
+<p>
+    Our analysis estimated the planet's mass to be <strong>2.4 ± 2.8 M<sub>J</sub></strong> and its radius to be <strong>1.8 ± 0.2 R<sub>J</sub></strong>. These values confirm that HAT-P-32b fits within the classification of a <strong>Hot Jupiter</strong>, despite the large error margins. Our findings are consistent with those of Hartman et al. (2011), who also identified the planet as highly inflated — its radius is significantly larger than expected by standard planetary models (e.g. Fortney et al., 2007), making it one of the largest exoplanets known.
+</p>
+
+<p>
+    One challenge of using the transit method is that certain parameters, such as <strong>orbital period (P)</strong> and <strong>semi-major axis (a)</strong>, are difficult to constrain precisely. These two parameters are strongly correlated, and because both are used in mass calculations (involving powers of 2 and 3), even small uncertainties lead to large variations in the final planetary mass.
+</p>
+
+<p>
+    To improve future estimates, we recommend using the <strong>Exoplanet Transit Database</strong> (Poddaný et al., 2010) to coordinate observations across two successive transits. This would allow for a better first estimate of the orbital period and help tighten the priors for MCMC fitting. Doing so could reduce the chance of getting stuck in local minima during sampling.
+</p>
+
+<p>
+    Additionally, combining transit photometry with <strong>radial velocity (RV) measurements</strong> would improve the precision of key parameters. Doppler spectroscopy — tracking the star's wobble — allows for more accurate measurements of orbital period and mass. Using both methods together is more effective than either alone, especially for dealing with parameters with high uncertainty.
+</p>
+
+<p>
+    Our project also faced some observational limitations. We only had data from a single night, which limited our ability to reduce noise or detect patterns over time. Also, while we estimated stellar temperature using photometry, <strong>spectroscopy</strong> would have provided a more accurate temperature (via Wien's Law) and detailed information about the star's composition through its spectral lines.
+</p>
+
+<p>
+    In future work, it could be valuable to calculate the <strong>planet's mass loss rate</strong> and observe its possible gas tail caused by escaping hydrogen and helium. This would provide insight into the long-term evolution of hot Jupiters and might explain why few have been found with orbits closer than ~0.014 AU. Studying such systems with upcoming space telescopes like <strong>ARIEL</strong> could offer high-precision spectroscopic data on atmospheric composition (Pascale et al., 2018).
+</p>
+
+<p>
+    Additional studies could also include <strong>microlensing surveys</strong> of HAT-P-32's habitable zone to search for Earth-like planets. This method is more effective than the transit method for detecting small, distant planets with large orbital radii.
+</p>
+<p>
+    In summary, this project demonstrated a practical approach for detecting and analyzing a close-orbiting exoplanet using the transit method. We successfully estimated the planet's radius, orbital inclination, and transit duration. However, we encountered challenges in determining its orbital period and semi-major axis with high accuracy. We've outlined the causes of this uncertainty and provided recommendations for improving future analyses.
+</p>
+            <h3>Key Findings (TL;DR)</h3>
+            <ul>
+                <li>Confirmed HAT-P-32b as a highly inflated Hot Jupiter (1.8 R<sub>J</sub>)</li>
+                <li>Detected significant atmospheric mass loss through photoevaporation</li>
+                <li>Calculated extreme tidal forces (~10<sup>27</sup> N) likely causing tidal locking</li>
+                <li>System's habitable zone lies between 1.15-2.71 AU from the star</li>
+            </ul>
+            
+            <h3>Limitations & Improvements</h3>
+            <p>The transit method showed limitations in determining orbital period and semi-major axis precisely due to parameter covariance. Future work could:</p>
+            <ol>
+                <li>Combine with radial velocity measurements for better mass determination</li>
+                <li>Observe multiple transits to constrain orbital period</li>
+                <li>Use spectroscopy to study atmospheric composition directly</li>
+                <li>Search for additional planets via microlensing in the habitable zone</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<section id="download-report" class="content-section">
+  <h2>Full Technical Report</h2>
+
+  <!-- Desktop PDF view -->
+  <div class="pdf-viewer desktop-only">
+    <iframe src="../Exoplanets/Documents/An_Analysis_of_the_Hot_Jupiter_HAT_P_32b_and_Planetary_System_of_the_F_Type_Star_HAT_P_32-1.pdf" width="100%" height="500px" style="border: none;"></iframe>
+  </div>
+
+  <!-- Mobile-only download button -->
+  <div class="mobile-only">
+    <a href="../Exoplanets/Documents/An_Analysis_of_the_Hot_Jupiter_HAT_P_32b_and_Planetary_System_of_the_F_Type_Star_HAT_P_32-1.pdf" class="go-back-button" download>
+      📄 Download PDF Report
+    </a>
+  </div>
+</section>
+
+
+<footer>
+    <div class="footer-content">
+        <p>© Daniel Mason, 2024</p>
+    </div>
+</footer>
+
+<script src="exoplanet-transit.js"></script>
+</body>
+</html>

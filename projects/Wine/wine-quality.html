@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Quality </title>
+    <link rel="stylesheet" href="wine-quality.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body class="wine-quality-page">
+    <nav>
+        <input type="checkbox" id="nav-toggle" hidden>
+        <label for="nav-toggle" class="nav-toggle-label">&#9776; </label>
+        <ul class="nav-menu">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="#top">Top</a></li>
+            <li><a href="#data-exploration">Data Exploration</a></li>
+            <li><a href="#Learning-selec">Learning Algorithm Selection</a></li>
+            <li><a href="#Model-training">Model Training and Evaluation</a></li>
+            <li><a href="#conclusion">Conclusion and Project Reflections</a></li>
+            <li><a href="#download-report">View Full Report</a></li>
+            <li><button class="go-back-button" onclick="window.history.back()">Back</button></li>
+        </ul>
+    </nav>
+    <!-- Header Section -->
+    <section id="top" class="hero-section">
+        <h1>Report on the Capability of a Programmed Model to Predict the Quality of Wines</h1>
+    </section>
+  
+    <section class="content-section">
+        <h2>Introduction to the project</h2>
+         <p>
+            In my final year of University, I worked on a cool solo project where we were asked to use machine learning algorithms to assess a
+             <a href="https://archive.ics.uci.edu/dataset/186/wine+quality" target="_blank">data set</a> of our own choice. Making the project entirely 
+             individual with neither peer nor advisory assistance. The data set I chose is related to red and white vinho verde wine samples where my aim for the 
+             project was to address how one could enhance and/or automate the wine quality assessment process by utilising machine learning algorithms to 
+             analyse the key physico-chemical properties of high and low quality wines. 
+
+        </p>
+         <p>
+            In the wine industry assessment of its products quality has immense influence over the consumer preferences, market
+            positioning, and ultimately, commercial success. Conventional, wine quality evaluation relies on sensory analysis
+            carried out by a Sommelier. This method of assessment is subjective, time-consuming, and often limited in its scale.
+            This project addresses how one could address the challenge of enhancing and automating the wine quality assessment
+            process. By utilising machine learning algorithms to analyse the key physico-chemical properties (seen in Table 1) of high
+            and low quality wines. The overall aim of the project being to predict and categorise wines into distinct quality levels,
+            providing a systematic and efficient alternative to manual evaluation on a large scale.
+        </p>
+        <p>
+            Under Tom Mitchell’s definition of a machine learning task, “a computer program is said to learn from experience E
+            with respect to some class of tasks T and performance measure P if its performance at tasks in T , as measured
+            by P , improves with experience E”.[3] My problem can be
+            defined within this framework as follows:
+        </p>
+        <ul>
+            <li>
+                 Experience (E): A labelled data-set of physico-chemical
+                properties and wine quality ratings.
+            </li> 
+            <li>
+                Task (T): Predicting and categorising the quality rating of
+                wines based on these properties
+            </li>
+            <li>
+                Performance Measure (P ): The F1 scores of the model
+            </li>
+        </ul>
+        <p>
+            This project aims to enhance the classification of wine quality based on its physical properties. By developing an
+            accurate predictive model, which will enable a more objective assessment of wine quality. Ultimately, this could aid
+            manufacturers in assessing and potentially improving wine quality based on its properties and characteristics. There
+            is further the opportunity to use the model in conjunction with monetary data to analyse the most cost effective high
+            quality wine to produce. This however would require access to more sensitive and secure data which would need to be
+            sourced directly from a manufacturer.
+        </p>
+    </section>
+
+    <section id="data-exploration" class="content-section">
+            <h2>Data Exploration</h2>
+        
+    
+        <h3>
+            Understanding the data set
+        </h2>
+        <p>
+            Foolishly I spent a long time during this project wondering whether it was possible to combine the data for both the red and white wine 
+            varieties in order to expand and consider ~6400 instances rather than the smaller data sets. To decide if this was feasible I conducted a 
+            rudimentary exploration of the data which, in hindsight, would have been far easier with SQL. I found and compared the mean, standard deviation
+            and min/max of each physico-chemical property for both white and red wines respectively. These stats are shown in the below tables and represented in 
+            the graphs also.
+        </p>
+        <p>
+            I also plotted some distribution graphs to understand which categories of wine I had the most data for and where I may need to implement 
+            techniques to address class imbalances.
+        </p>
+    </section>
+    
+    <div id="wine-stats-container">
+            <section id="white-wine-stats" class="content-section">
+                <h2>White Wine Statistics from a sample of 4898</h2>
+                <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Physico-chemical Property</th>
+                            <th>Mean</th>
+                            <th>Std</th>
+                            <th>Min</th>
+                            <th>Max</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fixed Acidity</td>
+                            <td>6.8548</td>
+                            <td>0.8439</td>
+                            <td>3.8</td>
+                            <td>14.2</td>
+                        </tr>
+                        <tr>
+                            <td>Volatile Acidity</td>
+                            <td>0.2782</td>
+                            <td>0.1008</td>
+                            <td>0.08</td>
+                            <td>1.1</td>
+                        </tr>
+                        <tr>
+                            <td>Citric Acid</td>
+                            <td>0.3342</td>
+                            <td>0.1210</td>
+                            <td>0</td>
+                            <td>1.66</td>
+                        </tr>
+                        <tr>
+                            <td>Residual Sugar</td>
+                            <td>6.3914</td>
+                            <td>5.0721</td>
+                            <td>0.6</td>
+                            <td>65.8</td>
+                        </tr>
+                        <tr>
+                            <td>Chlorides</td>
+                            <td>0.0458</td>
+                            <td>0.0218</td>
+                            <td>0.009</td>
+                            <td>0.346</td>
+                        </tr>
+                        <tr>
+                            <td>Free Sulfur Dioxide</td>
+                            <td>35.3081</td>
+                            <td>17.0071</td>
+                            <td>2</td>
+                            <td>289</td>
+                        </tr>
+                        <tr>
+                            <td>Total Sulfur Dioxide</td>
+                            <td>138.3607</td>
+                            <td>42.4981</td>
+                            <td>9</td>
+                            <td>440</td>
+                        </tr>
+                        <tr>
+                            <td>Density</td>
+                            <td>0.9940</td>
+                            <td>0.0030</td>
+                            <td>0.9871</td>
+                            <td>1.0389</td>
+                        </tr>
+                        <tr>
+                            <td>pH</td>
+                            <td>3.1883</td>
+                            <td>0.1510</td>
+                            <td>2.72</td>
+                            <td>3.82</td>
+                        </tr>
+                        <tr>
+                            <td>Sulphates</td>
+                            <td>0.4898</td>
+                            <td>0.1141</td>
+                            <td>0.22</td>
+                            <td>1.08</td>
+                        </tr>
+                        <tr>
+                            <td>Alcohol</td>
+                            <td>10.5143</td>
+                            <td>1.2306</td>
+                            <td>8</td>
+                            <td>14.2</td>
+                        </tr>
+                        <tr>
+                            <td>Quality</td>
+                            <td>5.8779</td>
+                            <td>0.8856</td>
+                            <td>3</td>
+                            <td>9</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </section>
+            <section id="red-wine-stats" class="content-section">
+                <h2>Red Wine Statistics from a sample of 1599</h2>
+                <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Physico-chemical Property</th>
+                            <th>Mean</th>
+                            <th>Std</th>
+                            <th>Min</th>
+                            <th>Max</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fixed Acidity</td>
+                            <td>8.3196</td>
+                            <td>1.7411</td>
+                            <td>4.6</td>
+                            <td>15.9</td>
+                        </tr>
+                        <tr>
+                            <td>Volatile Acidity</td>
+                            <td>0.5278</td>
+                            <td>0.1791</td>
+                            <td>0.12</td>
+                            <td>1.58</td>
+                        </tr>
+                        <tr>
+                            <td>Citric Acid</td>
+                            <td>0.2710</td>
+                            <td>0.1948</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Residual Sugar</td>
+                            <td>2.5388</td>
+                            <td>1.4099</td>
+                            <td>0.9</td>
+                            <td>15.5</td>
+                        </tr>
+                        <tr>
+                            <td>Chlorides</td>
+                            <td>0.0875</td>
+                            <td>0.0471</td>
+                            <td>0.012</td>
+                            <td>0.611</td>
+                        </tr>
+                        <tr>
+                            <td>Free Sulfur Dioxide</td>
+                            <td>15.8749</td>
+                            <td>10.4602</td>
+                            <td>1</td>
+                            <td>72</td>
+                        </tr>
+                        <tr>
+                            <td>Total Sulfur Dioxide</td>
+                            <td>46.4678</td>
+                            <td>32.8953</td>
+                            <td>6</td>
+                            <td>289</td>
+                        </tr>
+                        <tr>
+                            <td>Density</td>
+                            <td>0.9967</td>
+                            <td>0.0019</td>
+                            <td>0.9901</td>
+                            <td>1.0037</td>
+                        </tr>
+                        <tr>
+                            <td>pH</td>
+                            <td>3.3111</td>
+                            <td>0.1544</td>
+                            <td>2.74</td>
+                            <td>4.01</td>
+                        </tr>
+                        <tr>
+                            <td>Sulphates</td>
+                            <td>0.6581</td>
+                            <td>0.1695</td>
+                            <td>0.33</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Alcohol</td>
+                            <td>10.4230</td>
+                            <td>1.0657</td>
+                            <td>8.4</td>
+                            <td>14.9</td>
+                        </tr>
+                        <tr>
+                            <td>Quality</td>
+                            <td>5.6360</td>
+                            <td>0.8076</td>
+                            <td>3</td>
+                            <td>8</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </section>
+        </div>
+    <section id="wine-graphs" class="content-section">
+            <div class="image-container">
+                <figure>
+                    <img src="Wine Images/White Wine Stats.png" alt="White Wine stats">
+                    <figcaption>White Wine Stats</figcaption>
+                </figure>
+                <figure>
+                    <img src="Wine Images/Red wine stats.png" alt="Red Wine stats">
+                    <figcaption>Red Wine Stats</figcaption>
+                </figure>
+                <figure>
+                    <img src="Wine Images/White Wine Dist.png" alt="White Wine dist">
+                    <figcaption>White Wine Distribution</figcaption>
+                </figure>
+                <figure>
+                    <img src="Wine Images/Red wine Dist.png" alt="Red Wine Dist">
+                    <figcaption>Red Wine Distribution</figcaption>
+                </figure>
+            </div>
+    </section>
+    <section id="note" class="content-section">
+        <h3>
+             A note:
+        </h3>
+        <p>
+            As could probably have been guessed from the start, white wine and red wine are different! - Too different in-fact to think about comparing 
+            them in the same dataset, who'd've thought? It then occurred to me that I could make a model to distinguish between red and white wines,
+            My thinking being it would be far simpler for me and far more likely to produce an accurate model if it would only have to classify between 2 categories but after minimal consideration realised 
+            the real world application was limited, why bother designing an algorithm to compare physcio-chemical properties to establish something that can accurately 
+            and easily be carried out by our eyes.
+        </p>
+        <p>
+            As a result the majority of the project from this point focused on the white wine dataset because of its size and more diverse distribution.
+            While looking at the count distribution in the white wine dataset however, I noticed an issue that could impact the model's 
+            performance. Since there was no input data for quality levels 1, 2, or 10, the model would never predict those qualities for a wine. 
+            To fix this, I grouped the data into four broader categories:
+        <ul>
+            <li>Poor: qualities 1, 2, and 3</li>
+            <li>Mediocre: qualities 4 and 5</li> 
+            <li>Good: qualities 6 and 7</li>
+            <li>Excellent: qualities 8, 9, and 10</li>
+        </ul>
+            This approach not only simplified the representation but also I hoped would make the results easier for customers to understand. 
+            Where most people may not notice the distinction between a quality 9 and 10 wine, they’d likely see the difference between a 6 and a 10.
+        </p>
+    </section>
+    
+    <section id="Learning-selec" class="content-section">
+            <h2>Learning Algorithm Selection</h2> 
+        
+            <p>
+            Choosing the right algorithm was all about finding one that could handle the multi-class nature of the dataset.
+            For my baseline model, I went with Random Forest. Why? It’s a solid choice because its ensemble structure helps keep overfitting 
+            in check and deals well with non-linear patterns. That said, I knew there might be a challenge when it came to the minority classes in
+            the dataset—limited diversity during training could make it hard for the model to generalise well to those.
+            To step things up, I opted for gradient boosting as the proposed model. Like Random Forest, it’s an ensemble method, but it has an 
+            edge when it comes to handling imbalanced classes. Its sequential approach lets it learn from the mistakes of earlier trees, 
+            making it more adaptive and (hopefully) more accurate.
+            Both algorithms were implemented using the scikit-learn library, which made the whole process smooth and efficient.
+            </p>
+    </section>
+
+    <section id = Model-training class="content-section">
+            <h2>Model Training and Evaluation</h2>
+        <h3>Model Training:</h3>
+        <h4>Addressing Data Splitting and Class Imbalance</h4>
+        <p>
+          Before building the model, I carefully prepared the data to ensure the integrity of the training and testing process. Initially, 
+          the dataset was divided into two parts: 80% for training and 20% for testing. This split was performed in a stratified manner to 
+          preserve the distribution of wine quality categories in both sets. Ensuring no overlap between the training and test data maintained 
+          the independence necessary for evaluating the model’s performance accurately.
+        </p>
+        <p>
+          To address the class imbalance present in the wine quality data, I implemented an up-sampling technique using the
+          <code>RandomOverSampler</code> from the <code>imblearn</code> library. This method focuses on the minority classes by randomly 
+          duplicating their instances until the class sizes are balanced with the majority class. By introducing randomness during the 
+          sampling process, the method helps reduce overfitting and adds variability to the training data. However, because the dataset had a 
+          limited number of features, the variability introduced was relatively small.
+        </p>
+        <figure>
+            <img src="Wine Images/Count Dist Post Upsampling.png" alt="Count Dist Post Upsampling">
+        </figure>
+        <p>
+          Given the dataset's structure, I retained all features for training, as each could provide crucial insights into wine quality. With more 
+          physicochemical properties available, feature selection might have been used to reduce noise and computational redundancy. For this 
+          project, however, retaining all attributes ensured that no valuable information was lost, aligning with the overall aim of creating an 
+          effective and accurate predictive model.
+        </p>
+        <p>
+            Preprocessing and defining the target variables were critical steps in preparing the data. These steps helped address class imbalance and ensured the model remained reliable and robust during training and testing.
+        </p>
+        
+        <h3>Hyperparameter Tuning</h3>
+        <p>
+            Both models underwent hyperparameter tuning using <code>GridSearchCV</code>. This is a tuning method that exhaustively tests all specified parameter combinations to find the optimal settings for a machine learning model. You define a parameter grid (e.g., {'n_estimators': [50, 100, 200]}), and GridSearchCV evaluates each combination using cross-validation, selecting the one with the best performance (based on a chosen metric like accuracy). It guarantees the best result within the grid but can be slow for large parameter spaces..
+        </p>
+        
+        <h4>Random Forest Parameters</h4>
+        <ul>
+            <li><strong>n_estimators</strong>: The number of decision trees in the forest. More trees improve performance but can increase computation time and the risk of overfitting. Values tested: <em>100, 200, 300, 400</em>.</li>
+            <li><strong>max_depth</strong>: The depth of each decision tree. Deeper trees detect complex patterns but risk overfitting. Values tested: <em>2, 5, 10, 20</em>.</li>
+            <li><strong>min_samples_split</strong>: The minimum number of samples required to split a node. Larger values prevent overfitting by avoiding overly small splits. Values tested: <em>2, 5, 10</em>.</li>
+            <li><strong>min_samples_leaf</strong>: The minimum number of samples in a leaf node. Larger values create more general decision boundaries. Values tested: <em>1, 2, 5</em>.</li>
+        </ul>
+        <p>
+            The best combination of parameters for the Random Forest model was:
+            <em>n_estimators: 400, max_depth: 20, min_samples_split: 5, min_samples_leaf: 1</em>. These settings were used to fit the model to the test data.
+        </p>
+        
+        <h4>Gradient Boosting Parameters</h4>
+        <ul>
+            <li><strong>n_estimators</strong>: The number of trees. Values tested: <em>100, 200, 300, 400</em>.</li>
+            <li><strong>max_depth</strong>: The depth of each tree. Values tested: <em>3, 4, 5, 6</em>.</li>
+            <li><strong>learning_rate</strong>: Scales the contribution of each tree. High values allow strong impact but risk overfitting. Low values encourage smoother convergence. Values tested: <em>0.1, 0.01, 0.001</em>.</li>
+        </ul>
+        <p>
+            The best combination of parameters for the Gradient Boosting model was:
+            <em>n_estimators: 400, max_depth: 6, learning_rate: 0.1</em>. These settings were used to fit the model to the test data.
+        </p>
+
+        <h3>Model Evaluation and Comparison</h3>
+        <div class="model-comparison">
+            <div class="model-toggle">
+                <button class="toggle-button active" data-target="random-forest">Random Forest</button>
+                <button class="toggle-button" data-target="xgboost">XGBoost</button>
+            </div>
+            
+            <div id="random-forest" class="model-results active">
+                <!-- RF content -->
+                 <div class="table-wrapper">
+                <table>
+                    <caption><h3>Random Forest Accuracy After Upsampling</h3></caption>
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Precision</th>
+                            <th>Recall</th>
+                            <th>F1-Score</th>
+                            <th>Support</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1-3 (Poor)</td>
+                            <td>0.00</td>
+                            <td>0.00</td>
+                            <td>0.00</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>4-5 (Mediocre)</td>
+                            <td>0.77</td>
+                            <td>0.72</td>
+                            <td>0.74</td>
+                            <td>345</td>
+                        </tr>
+                        <tr>
+                            <td>6-7 (Good)</td>
+                            <td>0.81</td>
+                            <td>0.88</td>
+                            <td>0.84</td>
+                            <td>594</td>
+                        </tr>
+                        <tr>
+                            <td>8-10 (Excellent)</td>
+                            <td>0.89</td>
+                            <td>0.43</td>
+                            <td>0.58</td>
+                            <td>37</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Macro avg</td>
+                            <td>0.62</td>
+                            <td>0.51</td>
+                            <td>0.54</td>
+                            <td>980</td>
+                        </tr>
+                        <tr>
+                            <td>Weighted avg</td>
+                            <td>0.80</td>
+                            <td>0.80</td>
+                            <td>0.79</td>
+                            <td>980</td>
+                        </tr>
+                        <tr>
+                            <td>Accuracy</td>
+                            <td colspan="4">0.80 (980 samples)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <h3>Best Random Forest Hyperparameters:</h3>
+                <p><strong>'max_depth': 20, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 400</strong></p>
+                <div class="image-container2">
+                    <figure>
+                        <img src="Wine Images/Random Forest CM.png" alt="Random Forest Confusion Matrix" class="cm-image">
+                    </figure>
+                </div>
+            </div>
+            
+            <div id="xgboost" class="model-results">
+                <!-- XGB content -->
+                 <div class="table-wrapper">
+                <table>
+                    <caption><h3>XGBoost Accuracy After Upsampling<h3></caption>
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Precision</th>
+                            <th>Recall</th>
+                            <th>F1-Score</th>
+                            <th>Support</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1-3 (Poor)</td>
+                            <td>0.00</td>
+                            <td>0.00</td>
+                            <td>0.00</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>4-5 (Mediocre)</td>
+                            <td>0.75</td>
+                            <td>0.72</td>
+                            <td>0.73</td>
+                            <td>345</td>
+                        </tr>
+                        <tr>
+                            <td>6-7 (Good)</td>
+                            <td>0.81</td>
+                            <td>0.86</td>
+                            <td>0.84</td>
+                            <td>594</td>
+                        </tr>
+                        <tr>
+                            <td>8-10 (Excellent)</td>
+                            <td>0.89</td>
+                            <td>0.43</td>
+                            <td>0.58</td>
+                            <td>37</td>
+                        </tr>
+                       
+                        <tr>
+                            <td>Macro avg</td>
+                            <td>0.61</td>
+                            <td>0.50</td>
+                            <td>0.54</td>
+                            <td>980</td>
+                        </tr>
+                        <tr>
+                            <td>Weighted avg</td>
+                            <td>0.79</td>
+                            <td>0.79</td>
+                            <td>0.79</td>
+                            <td>980</td>
+                        </tr>
+                        <tr>
+                            <td>Accuracy</td>
+                            <td colspan="4">0.79 (980 samples)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <h3>Best XGBoost Hyperparameters:</h3>
+                <p><strong>'learning_rate': 0.1, 'max_depth': 6, 'n_estimators': 400</strong></p>
+            <div class="image-container2">
+                <figure>
+                    <img src="Wine Images/XGB CM.png" alt="XGB boost Confusion Matrix" class="cm-image">
+                </figure>
+            </div>
+        </div>
+       
+        
+        
+       
+       
+  
+
+    
+ 
+    
+
+ 
+        <p>
+            I sometimes need reminding how to read a confusion matrix, if you're the same, its quite simple really, The diagonal values 
+            represent the number of instances that were correctly placed by the algorithm For example, in the third row (Actual class 6-7), 
+            the value 521 indicates that 521 samples from class 6-7 were correctly predicted as good wines. Off diagonal values on the other hand 
+            show where the algorithm has placed an instance incorrectly, for example, in the second row, the value 98 indicates that 98 
+            samples from class 4-5 were incorrectly predicted as class 6-7.
+        </p>
+    </section>
+    <section class="content-section">
+    <h3>Insights:</h3>
+        <p>
+            The Random Forest model performed slightly better overall. However, as seen in the confusion matrices, both models struggled to predict low-quality wines. Neither model made a correct prediction for this category. 
+        </p>
+        <p>
+            While this result is not ideal, it aligns with the project’s real-world goals. Misclassifying a "poor" wine as "mediocre" is less concerning, as manufacturers aim to produce higher-quality wines. However, this suggests that the up-sampling method used to balance the data may have caused overfitting for the minority classes.
+        </p>
+    </section>
+
+    <section id="Conclusion" class="content-section">
+            <h2>Conclusion and Project Reflections</h2>
+        <p>
+            This project focused on developing and evaluating two machine learning models to predict wine quality based on its chemical composition.
+            The goal was to create a more objective and time-efficient method for assessing wine quality. The analysis revealed that red and white 
+            wines have distinct characteristics, so they couldn't be compared directly. While both models performed similarly, the Random Forest 
+            classifier marginally outperformed the XGBoost model, which was initially expected to be more robust. However, neither model was perfect and would 
+            need further improvement before being used commercially.
+        </p>
+        <p>
+            I believe that with access to a larger and more diverse dataset, including more examples of 'poor' and 'excellent' wines, the models 
+            could learn more effectively and address the serious issue of performance when classifying both extremes. As a completed and refined product
+            I believe this tool could be valuable for both wine producers and consumers as you could easily engineer this to understand which physcio-chemical
+            elements contributed most to the perceived quality of the wine and even go one step further and make a cost analysis for the manufacturing process
+        .</p>
+        <p>
+            Throughout the project, I applied machine learning principles learned in class to a real-world scenario, which helped me better 
+            understand the practical challenges and time investment involved in machine learning. One of the biggest challenges I faced was 
+            dealing with class imbalance, which still affected the model's performance. Despite this, I enjoyed trying to improve the results. 
+            In the future, it might be worth exploring other machine learning techniques, as an ensemble method may not have been the best choice 
+            for this task.
+        </p>
+    </section>
+   <section id="report" class="content-section">
+  <h2>Full Technical Report</h2>
+
+  <!-- Desktop PDF view -->
+  <div class="pdf-viewer desktop-only">
+    <iframe src="../Wine/wine documents/Wine Classification Report.pdf" width="100%" height="500px" style="border: none;"></iframe>
+  </div>
+
+  <!-- Mobile-only download button -->
+  <div class="mobile-only">
+    <a href="../Wine/wine documents/Wine Classification Report.pdf" class="go-back-button" download>
+      📄 Download PDF Report
+    </a>
+  </div>
+</section>
+
+    <footer>
+        <p>© Daniel Mason, 2024</p>
+    </footer>
+    <script src="wine-quality.js"></script>
+
+</body>
+</html>
