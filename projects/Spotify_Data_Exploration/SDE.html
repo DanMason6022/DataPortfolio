@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spotify Listening Dashboard | Daniel Mason</title>
+  <link rel="stylesheet" href="SDE.css" /> <!-- if you use a separate stylesheet -->
+</head>
+<body>
+    <nav>
+      <input type="checkbox" id="nav-toggle" hidden>
+      <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
+        <ul class="nav-menu">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href=#Project-intro>Project Intro</a></li>
+            <li><a href=#Dash>The Dashboard</a></li>
+            <li><a href=#Comments>Insights / Comments</a></li>
+            <li><a href=#Learning>Learning / Reflection</a></li>
+            <li><button class="go-back-button" onclick="window.history.back()">Back</button></li>
+        </ul>
+    </nav>
+
+      <header class="hero-section">
+    <h1>Data Viz Using Tableau and Spotify Data</h1>
+    
+    </header>
+
+  <section class="content-section" id="Project-intro">
+    <h2>Project Intro</h2>
+    <p>Below is my first hands on exposure to Tableau, it was a self led task, which to be honest was pretty basic but I think that was necessary for getting to grips with and understanding the software.
+        I chose a dataset I was familiar with and fascinated by, one which could show actual actionable insight to my own habits. Further, it was one I was sure would have tutorials and other dashboards to observe for inspiration, My complete Spotify listening data from the range of 2014 -2025.  </p>
+        <p>The aim of this was purely to experiment with the capabilites of Tableau and to build a foundational level of understanding with how to use the software</p>
+    </section>
+    <section class="project-container" id="Dash">
+        <h2>The Dashboard!</h2>
+        <div style="width: 100%">
+<div class='tableauPlaceholder' id='viz1747758514179' style='position: relative'><noscript><a href='#'><img alt='Dashboard 3 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotifydataanlysisthebasics&#47;Dashboard3&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Spotifydataanlysisthebasics&#47;Dashboard3' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotifydataanlysisthebasics&#47;Dashboard3&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-GB' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1747758514179');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1200px';vizElement.style.height='1027px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1200px';vizElement.style.height='1027px';} else { vizElement.style.width='100%';vizElement.style.height='1577px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>    </section>
+
+
+    <section class="content-section" id="Comments">
+    <h2>Comments/Insights</h2>
+        <p>At first glance the Listening timeline is most intriguing to me, specifically the noticeable spike in listening during October 2021. Thinking back, this was my first month at university, and also my first month living alone, consequently, I spent a lot of time with music playing as ambient background sound which likely explains the sudden increase.  </p>
+        <p>Also the apparent peak of the New Artists graph suggests a plateau in my music taste and that I am not finding new artists nearly as frequently as 2019,2020 or 2021, where I discovered 2458 new artists total</p>
+        <p>These two graphs build an interesting perspective together, for example, I find it interesting that a significant portion of the newly discovered artists occur in the period between 2019 and 2021 considering the weekly consumption of music is on average half as much as that between the years 2022 and 2025. A relationship that suggests that I have established a comfortable basis of artists that I enjoy and am happy to listen to in large volumes and do not put effort into exploring for other artists. </p>
+    </section>
+    <section class ="content-section" id="Learning">
+        <h2>Learning and Reflection</h2>
+        <p>Getting to grips with Tableau was a fun experience and I know I haven't even scratched the surface!</p>
+        <p>There were some difficulties I faced which I know I'll need to improve upon when dealing with more complex demands, for example the creation and understanding of calculated fields was tricky at times. I also struggled with the tile format of the dashboard, opting eventually to go with floating objects. This I found significantly easier though upon further research I see the benefit of the tiled dashboard because it ensures consistency, visual conformity, and ease of use as well as making edits/additions easier. As well as the advantages when it comes to sizing. </p>
+        <p>I think there is more to be done with this dataset. I hope to return to it with a more developed skillset and go past these surface level analytics, that being said I am happy with the final result and feel I met my initial objective of experimenting with Tableau to gather a beginners understanding.</p>
+    </section>
+    
+  
+    <footer>
+        <p> Copyright © Daniel Mason, 2024</p>
+    </footer>
+    
+    <script src="SDE.js"></script>
+</body>
+</html>
