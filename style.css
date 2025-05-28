@@ -542,7 +542,7 @@ footer {
 @media (max-width: 768px) {
     .notebook-tabs button {
         display: block;
-        width: 50%;
+        width: 80%;
         margin: 8px auto;
         font-size: 1rem;
     }
@@ -975,5 +975,3 @@ footer {
   }
 
 }
-
-
