@@ -33,34 +33,34 @@
          <p>
             In my final year of University, I worked on a cool solo project where we were asked to use machine learning algorithms to assess a
              <a href="https://archive.ics.uci.edu/dataset/186/wine+quality" target="_blank">data set</a> of our own choice. Making the project entirely 
-             individual with neither peer nor advisory assistance. The data set I chose is related to red and white vinho verde wine samples where my aim for the 
+             individual with neither peer nor advisory assistance. The data set I chose is related to red and white vinho verde wine samples, where my aim for the 
              project was to address how one could enhance and/or automate the wine quality assessment process by utilising machine learning algorithms to 
              analyse the key physico-chemical properties of high and low quality wines. 
 
         </p>
          <p>
-            In the wine industry assessment of its products quality has immense influence over the consumer preferences, market
-            positioning, and ultimately, commercial success. Conventional, wine quality evaluation relies on sensory analysis
+            In the wine industry, assessment of its product quality has immense influence over consumer preferences, market
+            positioning, and ultimately, commercial success. Conventional wine quality evaluation relies on sensory analysis
             carried out by a Sommelier. This method of assessment is subjective, time-consuming, and often limited in its scale.
             This project addresses how one could address the challenge of enhancing and automating the wine quality assessment
             process. By utilising machine learning algorithms to analyse the key physico-chemical properties (seen in Table 1) of high
-            and low quality wines. The overall aim of the project being to predict and categorise wines into distinct quality levels,
+            and low quality wines. The overall aim of the project was to predict and categorise wines into distinct quality levels,
             providing a systematic and efficient alternative to manual evaluation on a large scale.
         </p>
         <p>
             Under Tom Mitchell’s definition of a machine learning task, “a computer program is said to learn from experience E
             with respect to some class of tasks T and performance measure P if its performance at tasks in T , as measured
-            by P , improves with experience E”.[3] My problem can be
+            by P , improves with experience E”. My problem can be
             defined within this framework as follows:
         </p>
         <ul>
             <li>
-                 Experience (E): A labelled data-set of physico-chemical
+                 Experience (E): A labelled dataset of physico-chemical
                 properties and wine quality ratings.
             </li> 
             <li>
                 Task (T): Predicting and categorising the quality rating of
-                wines based on these properties
+                Wines based on these properties
             </li>
             <li>
                 Performance Measure (P ): The F1 scores of the model
@@ -70,8 +70,7 @@
             This project aims to enhance the classification of wine quality based on its physical properties. By developing an
             accurate predictive model, which will enable a more objective assessment of wine quality. Ultimately, this could aid
             manufacturers in assessing and potentially improving wine quality based on its properties and characteristics. There
-            is further the opportunity to use the model in conjunction with monetary data to analyse the most cost effective high
-            quality wine to produce. This however would require access to more sensitive and secure data which would need to be
+            is further the opportunity to use the model in conjunction with monetary data to analyse the most cost-effective high-quality wine to produce. This, however, would require access to more sensitive and secure data, which would need to be
             sourced directly from a manufacturer.
         </p>
     </section>
@@ -84,14 +83,14 @@
             Understanding the data set
         </h2>
         <p>
-            Foolishly I spent a long time during this project wondering whether it was possible to combine the data for both the red and white wine 
-            varieties in order to expand and consider ~6400 instances rather than the smaller data sets. To decide if this was feasible I conducted a 
-            rudimentary exploration of the data which, in hindsight, would have been far easier with SQL. I found and compared the mean, standard deviation
-            and min/max of each physico-chemical property for both white and red wines respectively. These stats are shown in the below tables and represented in 
+            Foolishly, I spent a long time during this project wondering whether it was possible to combine the data for both the red and white wine 
+            varieties in order to expand and consider ~6400 instances rather than the smaller datasets. To decide if this was feasible, I conducted a 
+            rudimentary exploration of the data, which, in hindsight, would have been far easier with SQL. I found and compared the mean, standard deviation
+            and min/max of each physico-chemical property for both white and red wines respectively. These stats are shown in the tables below and represented in 
             the graphs also.
         </p>
         <p>
-            I also plotted some distribution graphs to understand which categories of wine I had the most data for and where I may need to implement 
+            I also plotted some distribution graphs to understand which categories of wine I had the most data for, and where I may need to implement 
             techniques to address class imbalances.
         </p>
     </section>
@@ -327,15 +326,15 @@
              A note:
         </h3>
         <p>
-            As could probably have been guessed from the start, white wine and red wine are different! - Too different in-fact to think about comparing 
+            As could probably have been guessed from the start, white wine and red wine are different! - Too different in fact to think about comparing 
             them in the same dataset, who'd've thought? It then occurred to me that I could make a model to distinguish between red and white wines,
             My thinking being it would be far simpler for me and far more likely to produce an accurate model if it would only have to classify between 2 categories but after minimal consideration realised 
             the real world application was limited, why bother designing an algorithm to compare physcio-chemical properties to establish something that can accurately 
             and easily be carried out by our eyes.
         </p>
         <p>
-            As a result the majority of the project from this point focused on the white wine dataset because of its size and more diverse distribution.
-            While looking at the count distribution in the white wine dataset however, I noticed an issue that could impact the model's 
+            As a result, the majority of the project from this point focused on the white wine dataset because of its size and more diverse distribution.
+            While looking at the count distribution in the white wine dataset, however, I noticed an issue that could impact the model's 
             performance. Since there was no input data for quality levels 1, 2, or 10, the model would never predict those qualities for a wine. 
             To fix this, I grouped the data into four broader categories:
         <ul>
@@ -344,7 +343,7 @@
             <li>Good: qualities 6 and 7</li>
             <li>Excellent: qualities 8, 9, and 10</li>
         </ul>
-            This approach not only simplified the representation but also I hoped would make the results easier for customers to understand. 
+            This approach not only simplified the representation but also, I hoped would make the results easier for customers to understand. 
             Where most people may not notice the distinction between a quality 9 and 10 wine, they’d likely see the difference between a 6 and a 10.
         </p>
     </section>
@@ -401,7 +400,7 @@
         
         <h4>Random Forest Parameters</h4>
         <ul>
-            <li><strong>n_estimators</strong>: The number of decision trees in the forest. More trees improve performance but can increase computation time and the risk of overfitting. Values tested: <em>100, 200, 300, 400</em>.</li>
+            <li><strong>n_estimators</strong>: The number of decision trees in the forest. More trees improve performance, but can increase computation time and the risk of overfitting. Values tested: <em>100, 200, 300, 400</em>.</li>
             <li><strong>max_depth</strong>: The depth of each decision tree. Deeper trees detect complex patterns but risk overfitting. Values tested: <em>2, 5, 10, 20</em>.</li>
             <li><strong>min_samples_split</strong>: The minimum number of samples required to split a node. Larger values prevent overfitting by avoiding overly small splits. Values tested: <em>2, 5, 10</em>.</li>
             <li><strong>min_samples_leaf</strong>: The minimum number of samples in a leaf node. Larger values create more general decision boundaries. Values tested: <em>1, 2, 5</em>.</li>
@@ -589,9 +588,9 @@
 
  
         <p>
-            I sometimes need reminding how to read a confusion matrix, if you're the same, its quite simple really, The diagonal values 
-            represent the number of instances that were correctly placed by the algorithm For example, in the third row (Actual class 6-7), 
-            the value 521 indicates that 521 samples from class 6-7 were correctly predicted as good wines. Off diagonal values on the other hand 
+            I sometimes need reminding how to read a confusion matrix, if you're the same, it's quite simple really, the diagonal values 
+            represent the number of instances that were correctly placed by the algorithm. For example, in the third row (Actual class 6-7), 
+            The value 521 indicates that 521 samples from classes 6-7 were correctly predicted as good wines. Off-diagonal values on the other hand 
             show where the algorithm has placed an instance incorrectly, for example, in the second row, the value 98 indicates that 98 
             samples from class 4-5 were incorrectly predicted as class 6-7.
         </p>
@@ -618,8 +617,8 @@
         <p>
             I believe that with access to a larger and more diverse dataset, including more examples of 'poor' and 'excellent' wines, the models 
             could learn more effectively and address the serious issue of performance when classifying both extremes. As a completed and refined product
-            I believe this tool could be valuable for both wine producers and consumers as you could easily engineer this to understand which physcio-chemical
-            elements contributed most to the perceived quality of the wine and even go one step further and make a cost analysis for the manufacturing process
+            I believe this tool could be valuable for both wine producers and consumers, as you could easily engineer this to understand which physico-chemical
+            elements contributed most to the perceived quality of the wine, and even go one step further and make a cost analysis for the manufacturing process
         .</p>
         <p>
             Throughout the project, I applied machine learning principles learned in class to a real-world scenario, which helped me better 
