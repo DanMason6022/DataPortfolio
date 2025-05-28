@@ -520,3 +520,10 @@ figure img:hover {
     margin-top: 1rem;
   }
 }
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2e2e2e;
+    color: #fff;
+    margin-top: 40px;
+}
