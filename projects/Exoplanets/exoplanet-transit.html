@@ -34,7 +34,7 @@
 
     <section id="introduction" class="content-section">
         <h2>Project Introduction</h2>
-        <p>This project marked my first hands-on experience with observational astronomy and exoplanet detection. Using Durham University's Far-East-20 telescope, I, along with my Lab partner were tasked with the open ended task of investigating an exoplanet in transit.</p>
+        <p>This project marked my first hands-on experience with observational astronomy and exoplanet detection. Using Durham University's Far-East-20 telescope, I, along with my Lab partner, were tasked with the open-ended task of investigating an exoplanet in transit.</p>
 
         <h3>Intro to Exoplanets</h3>
         <p>Exoplanets are planets that exist outside our solar system, most of which orbit a star. The study of exoplanets is growing rapidly and brings together many areas of science, such as astronomy, planetary physics, and astrobiology. This field helps us understand how planetary systems form and evolve. Scientists also study the habitable zones around stars to see if exoplanets might support life. If life exists, it could be similar to simple organisms on Earth, like chemotrophs, which might get energy from chemicals in their environment</p>
@@ -49,7 +49,7 @@
     <section id="methodology" class="content-section">
         <h2>Project Overview</h2>
         <p>
-        This project focuses on the exoplanet HAT-P-32b, a gas giant orbiting the F-type star HAT-P-32, using observational data we collected. By monitoring changes in the star's brightness — a method known as transit photometry, we can extract several fundamental parameters. These include the <strong>planet-to-star radius ratio</strong>, the <strong>orbital distance</strong>, and the <strong>orbital period</strong> — knowing these, we can infer key characteristics of both the planet and its host star
+        This project focuses on the exoplanet HAT-P-32b, a gas giant orbiting the F-type star HAT-P-32, using observational data we collected. By monitoring changes in the star's brightness — a method known as transit photometry- we can extract several fundamental parameters. These include the <strong>planet-to-star radius ratio</strong>, the <strong>orbital distance</strong>, and the <strong>orbital period</strong> — knowing these, we can infer key characteristics of both the planet and its host star
         </p>
         <div class="methodology-grid">
             <div class="methodology-item">
@@ -92,14 +92,14 @@
         <strong>Preprocessing:</strong> Raw image data underwent standard CCD calibration, including <em>dark frame subtraction</em> to remove thermal noise and <em>flat field correction</em> to compensate for pixel sensitivity variations and optical vignetting. Master calibration frames were constructed from median-combined darks and flats taken during the same observing session.
     </li>
     <li>
-        <strong>Photometry:</strong> Aperture photometry was applied to each calibrated image using a range of aperture radii to evaluate signal-to-noise ratios. A 5 arcsecond aperture was found to minimize photometric error (0.0042 mag). Multiple comparison stars with stable magnitudes were selected for differential photometry, allowing for the correction of atmospheric transparency variations and instrumental drift.
+        <strong>Photometry:</strong> Aperture photometry was applied to each calibrated image using a range of aperture radii to evaluate signal-to-noise ratios. A 5 arcsecond aperture was found to minimise photometric error (0.0042 mag). Multiple comparison stars with stable magnitudes were selected for differential photometry, allowing for the correction of atmospheric transparency variations and instrumental drift.
     </li>
     <li>
-        <strong>Light Curve Construction:</strong> The normalized flux of HAT-P-32 was plotted against time, producing a light curve that captured the transit event. Data points were binned to reduce scatter and enhance visibility of the transit signature. Outliers were identified and removed using a sigma-clipping algorithm with a 3σ threshold.
+        <strong>Light Curve Construction:</strong> The normalised flux of HAT-P-32 was plotted against time, producing a light curve that captured the transit event. Data points were binned to reduce scatter and enhance visibility of the transit signature. Outliers were identified and removed using a sigma-clipping algorithm with a 3σ threshold.
     </li>
     <li>
         <strong>Transit Model Fitting:</strong> A quadratic limb darkening transit model was fitted to the light curve using the <code>PyTransit</code> library. Key transit parameters — radius ratio (k), semi-major axis in stellar radii (a/R<sub>*</sub>), orbital inclination (i), and mid-transit time (t<sub>0</sub>) — were investigated by conducted an exploratory analysis of the key parame-
-        ters and their influence on a surrogate light curve, then tom optimise the parameters for the actual light curve we used Markov Chain Monte Carlo (MCMC) sampling with 30 walkers and 100,000 steps. Limb darkening coefficients were fixed using theoretical values from Claret & Bloemen (2011) tables for F-type stars.
+        ters and their influence on a surrogate light curve, then tom optimise the parameters for the actual light curve, we used Markov Chain Monte Carlo (MCMC) sampling with 30 walkers and 100,000 steps. Limb darkening coefficients were fixed using theoretical values from Claret & Bloemen (2011) tables for F-type stars.
     </li>
 </ol>        
 <div class="analysis-container">
@@ -112,7 +112,7 @@
     <div>
         <figure>
             <img src="../Exoplanets/Images/VARYING P .png" alt="MCMC parameter exploration">
-            <figcaption>Figure 5: Effects of varying the orbital period and semi makor axis  parameters on transit model</figcaption>
+            <figcaption>Figure 5: Effects of varying the orbital period and semi-major axis  parameters on transit model</figcaption>
         </figure>
     </div>
         <div>
@@ -171,11 +171,11 @@
 <section id = "Next steps" class="content-section">
     <h2>Analysis next steps</h2>
         <p>After running the MCMC analysis, we used the resulting parameter distributions to estimate the mass of HAT-P-32b. This was done by applying Kepler's third law to our values of the orbital period (P) and the semi-major axis (a). From that, we calculated a mean planetary mass and its uncertainty (standard deviation).
-            However, our results showed a major issue: P and a are strongly correlated in transit-only observations. This means that when one changes, the other must also change to keep the model fitting correctly — which makes it hard to nail down the planet's actual mass accurately.
+            However, our results showed a major issue: P and a are strongly correlated in transit-only observations. This means that when one changes, the other must also change to keep the model fitting correctly, which makes it hard to nail down the planet's actual mass accurately.
         </p>
         <p>Why did this happnen??</p>
-            <p>Because the transit method can't measure the planet's speed or actual motion — just the dip in light. That's where the radial velocity method is better: it directly observes the star's motion due to the planet's gravity and can more reliably calculate both P and a, and thus the mass.
-            We compared our findings with published values from Hartman et al. (2011) — who used radial velocity data. The comparison is shown in the Table below.            </p>
+            <p>Because the transit method can't measure the planet's speed or actual motion, just the dip in light. That's where the radial velocity method is better: it directly observes the star's motion due to the planet's gravity and can more reliably calculate both P and a, and thus the mass.
+            We compared our findings with published values from Hartman et al. (2011), who used radial velocity data. The comparison is shown in the Table below.            </p>
             </p>
             <table>
             <thead>
@@ -212,7 +212,7 @@
             <div>   
                 <figure>
                     <img src="../Exoplanets/Images/light curve better.png" alt="MCMC parameter exploration">
-                    <figcaption>Figure 5: An experimental model of the light curve incorporating the parameters p and a as provided by Hartman et al.</figcaption>
+                    <figcaption>Figure 7: An experimental model of the light curve incorporating the parameters p and a as provided by Hartman et al.</figcaption>
                 </figure>
             </div> 
         </div>
@@ -220,7 +220,7 @@
 
         <section id="results" class="content-section">
             <h2>Results</h2>
-            <p>        Using both our best-fit parameters from the transit model and incorporating the troubolsome parameter values provided by Hartman et al  we were able to calculate key physical characteristics of both the host star and its orbiting planet, HAT-P-32b. These calculations rely on standard astrophysical relationships, such as Kepler's third law and mass–radius relations, combined with our model parameters like orbital period, radius ratio, and inclination.</p>
+            <p>        Using both our best-fit parameters from the transit model and incorporating the troublesome parameter values provided by Hartman et al,  we were able to calculate key physical characteristics of both the host star and its orbiting planet, HAT-P-32b. These calculations rely on standard astrophysical relationships, such as Kepler's third law and mass–radius relations, combined with our model parameters like orbital period, radius ratio, and inclination.</p>
             <div class="key-facts">
             <div class="fact-box">
                 <h3>Calculated Stellar Parameters</h3>
@@ -268,7 +268,7 @@
         <div class="habitability-image">
             <figure>
                 <img src="../Exoplanets/Images/gas distribution hatp.png" alt="Habitable zone comparison">
-                <figcaption>Figure 11: Comparison of HAT-P-32 system to our solar system</figcaption>
+                <figcaption>Figure 8: Comparison of HAT-P-32 system to our solar system</figcaption>
             </figure>
         </div>
 
@@ -291,7 +291,7 @@
 </p>
 
 <p>
-    The position of these boundaries depends on the star's temperature and luminosity. Using formulas adapted from Kasting et al. (1993) and Ramirez (2018), we calculated that HAT-P-32b receives about <strong>2000 times</strong> the solar energy Earth receives — far beyond even the inner edge of the habitable zone.
+    The position of these boundaries depends on the star's temperature and luminosity. Using formulas adapted from Kasting et al. (1993) and Ramirez (2018), we calculated that HAT-P-32b receives about <strong>2000 times</strong> the solar energy Earth receives, far beyond even the inner edge of the habitable zone.
 </p>
 
 <div class="equation-block">
@@ -307,7 +307,7 @@
 <div class="image-container">
     <figure>
         <img src="../Exoplanets/Images/Habit.png" alt="Habitable zone comparison">
-        <figcaption>Figure 11: (a) Comparison of HAT-P-32's planetary system and our solar system. (b) Effective stellar flux vs. temperature for different habitable zone boundaries.</figcaption>
+        <figcaption>Figure 9: (a) Comparison of HAT-P-32's planetary system and our solar system. (b) Effective stellar flux vs. temperature for different habitable zone boundaries.</figcaption>
     </figure>
 </div>
 </section>
@@ -350,7 +350,7 @@
     Additional studies could also include <strong>microlensing surveys</strong> of HAT-P-32's habitable zone to search for Earth-like planets. This method is more effective than the transit method for detecting small, distant planets with large orbital radii.
 </p>
 <p>
-    In summary, this project demonstrated a practical approach for detecting and analyzing a close-orbiting exoplanet using the transit method. We successfully estimated the planet's radius, orbital inclination, and transit duration. However, we encountered challenges in determining its orbital period and semi-major axis with high accuracy. We've outlined the causes of this uncertainty and provided recommendations for improving future analyses.
+    In summary, this project demonstrated a practical approach for detecting and analysing a close-orbiting exoplanet using the transit method. We successfully estimated the planet's radius, orbital inclination, and transit duration. However, we encountered challenges in determining its orbital period and semi-major axis with high accuracy. We've outlined the causes of this uncertainty and provided recommendations for improving future analyses.
 </p>
             <h3>Key Findings (TL;DR)</h3>
             <ul>
