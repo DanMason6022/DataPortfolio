@@ -540,22 +540,24 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .notebook-tabs button {
-        display: block;
-        width: 80%;
-        margin: 8px auto;
-        font-size: 1rem;
-    }
+  .notebook-tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
 
-    .section-nav {
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-
-    .section-dot {
-        font-size: 1.2rem;
-    }
+  .notebook-tabs button {
+    width: 100%;
+    max-width: 300px;
+    margin: 6px 0;
+    text-align: center;
+  }
 }
+
 
 
 /* ===== FUTURE PROJECTS ===== */
