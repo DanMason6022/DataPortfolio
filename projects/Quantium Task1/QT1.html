@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantium Chips Customer Analytics</title>
+  <link rel="stylesheet" href="QT1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+  
+</head>
+<body class="ai-tsp-page">
+  <nav>
+    <input type="checkbox" id="nav-toggle" hidden>
+    <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
+    <ul class="nav-menu">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="#top">Top</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#segments">Customer Segments</a></li>
+      <li><a href="#pricing">Pricing Insights</a></li>
+      <li><a href="#recommendations">Recommendations</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+      <li><a href="#download-report">Download Report</a></li>
+      <li><button class="go-back-button" onclick="window.history.back()">Back</button></li>
+    </ul>
+  </nav>
+
+  <section id="top" class="hero-section">
+    <header>
+      <h1>Quantium Chips Customer Analytics</h1>
+    </header>
+  </section>
+
+  <section id="overview" class="content-section">
+  <h2>Project Overview</h2>
+  <p>This project forms part of the <a href="https://www.theforage.com/simulations/quantium/data-analytics-rqkb" target="_blank">'Quantium Job Simulation'</a> program., where the aim is to help the chip category manager understand who buys chips, how they buy, and how their preferences can shape commercial strategy. Using two core datasets — one comprising transactions and another containing customer demographic information — we performed extensive cleaning and integration steps. These included removing irrelevant or non-chip products like salsa, addressing anomalous transaction quantities that pointed to non-retail activity, and deriving essential new variables such as pack size, brand, unit price, and price per gram.</p>
+</section>
+
+<section id="cleaning" class="content-section">
+  <h2>Data Cleaning Process</h2>
+  <p>This was my first time using R, and diving into real-world messy data was both challenging and eye-opening. I used <code>dplyr</code> and <code>ggplot2</code> heavily, but also leaned on string manipulation functions and regular expressions to standardise and extract information like pack sizes and brand names from product strings.</p>
+  <p>After removing non-chip items like salsa and filtering out bulk purchases likely to be commercial, I merged datasets on loyalty card numbers. I also created new features like pack size groups and computed unit price and price per gram, which were crucial for later analysis.</p>
+  <p>It was a rewarding challenge that gave me a real appreciation for reproducible data workflows and the power of tidyverse tools.</p>
+
+  <!-- Show R Code Toggle Button -->
+  <button id="toggle-r-code" class="toggle-button">Show R Cleaning Code</button>
+  <div id="r-code-container" class="code-notebook" style="display: none;">
+    <pre><code id="r-code"></code></pre>
+  </div>
+</section>
+
+
+<section id="segments" class="content-section">
+  <h2>Customer Segments & Behaviour</h2>
+  <p>By linking transaction history with life stage and customer type demographics, we identified that a majority of chip category sales stemmed from three key groups: Budget Older Families, Mainstream Young Singles/Couples, and Mainstream Retirees. These segments were not only responsible for high sales volume but also exhibited high purchasing frequency throughout the year. This dual role in driving both depth and breadth of engagement made them strategic priorities.</p>
+  
+  <p>Notably, family-oriented segments consistently purchased larger-sized packs, highlighting a value-conscious mindset likely aimed at maximising price-per-gram efficiency. In contrast, segments composed of individuals or couples, especially in the younger demographic, showed a strong preference for smaller, more portable packs, aligning with convenience-driven purchasing motivations. A chi-squared test further confirmed that pack size preferences were not random but meaningfully tied to life stage, reinforcing the importance of targeted inventory and shelf strategy.</p>
+<div class="analysis-container">
+  <div>
+    <figure>
+      <img src="images/Total_Sales_By_Customer_Type.png" alt="Total Sales by Customer Segment"
+           class="zoomable-image" onclick="openZoom(this.src)">
+      <figcaption>Total chip sales by customer segment.</figcaption>
+    </figure>
+  </div>
+  <div>
+    <figure>
+      <img src="images/Transactions_by_customer_type.png" alt="Transactions by Customer Segment"
+           class="zoomable-image" onclick="openZoom(this.src)">
+      <figcaption>Number of transactions by customer segment.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="analysis-container">
+  <div>
+    <figure>
+      <img src="images/Average_Pack_Size_Distribution.png" alt="Total Sales by Customer Segment"
+           class="zoomable-image" onclick="openZoom(this.src)">
+      <figcaption>Total chip sales by customer segment.</figcaption>
+    </figure>
+  </div>
+  <div>
+    <figure>
+      <img src="images/Brands.png" alt="Transactions by Customer Segment"
+           class="zoomable-image" onclick="openZoom(this.src)">
+      <figcaption>Number of transactions by customer segment.</figcaption>
+    </figure>
+  </div>
+  <div>
+    <figure>
+      <img src="images/Repeat_purchasers.png" alt="Another Related Chart"
+           class="zoomable-image" onclick="openZoom(this.src)">
+      <figcaption>Description of the third image.</figcaption>
+    </figure>
+  </div>
+</div>
+
+
+</section>
+
+
+  <section id="pricing" class="content-section">
+    <h2>Pricing & Value Analysis</h2>
+    <p>Contrary to common assumptions, mainstream customers tended to pay more per pack than premium customers. Specifically, the average unit price for mainstream customers was $4.07, compared to $3.67 for premium buyers. This counterintuitive result was statistically validated through a t-test and supported by ANOVA tests which revealed that life stage significantly affected average unit prices paid.</p>
+    <p>Further inspection indicated that young singles and couples were willing to pay a premium for snack-sized or branded options, while families — particularly in the budget segment — consistently chose lower-cost options. These decisions appear driven by both economic considerations and practical household needs. Pearson correlation analysis further established that while larger packs have a higher absolute unit price (r = 0.507), they actually offer superior value on a per gram basis (r = -0.515). Thus, pricing structures and promotions need to reflect not just sticker prices but the perceived and actual value to different consumer groups.</p>
+  </section>
+
+  <section id="recommendations" class="content-section">
+    <h2>Strategic Recommendations</h2>
+    <p>In light of the findings, three core strategic directions emerge. First, marketing should leverage the value-seeking behaviour of family segments by promoting larger pack formats, with clear messaging around cost savings per gram and multipack convenience. Second, product innovation should cater to younger and single customers by offering high-end, branded small packs that reflect both quality and portability. These consumers have demonstrated both the willingness and ability to pay for premium experiences.</p>
+    <p>Additionally, shelf-space allocation and brand partnerships should be optimized based on customer life stage. Brands such as Smiths and Doritos, popular among family groups, should be prominently positioned in areas targeting family shoppers. Conversely, brands like Pringles and Red Rock Deli, which enjoy popularity among singles and premium buyers, should be highlighted in snacking or convenience aisles.</p>
+    <p>Finally, sales trends showed seasonality effects, with peaks leading into December and a notable dip on Christmas Day. This insight opens the door for seasonal promotional strategies — especially in Q4 — to capitalise on elevated purchase behaviour.</p>
+    <img src="images/Seasonality.png" alt="Monthly Chip Sales by Lifestage">
+  </section>
+<section id="reflection" class="content-section">
+  <h2>Reflection & Learning Moments</h2>
+  <p>After completing my own analysis and report, I reviewed Quantium’s sample solution and had several “ah-ha” moments that deepened my understanding of both R and the analytical process. It became clear how much nuance there is in data cleaning — from converting Excel-style integer dates to proper formats, to recognising why transaction gaps (like Christmas Day) might occur.</p>
+  <p>For instance, the official guide highlighted missing data on December 25th and explained that the absence of transactions was due to store closures — a detail I had overlooked. They also work in percentages of the total significantly more than I did, which in this environment makes a lot of sense as you can easily see your largest target groups and pinpoint potential growth markets</p>
+  <p>The exemplar also gives a deeper analysis of specific brand/customer group relations e.g. ' Mainstream young singles/couples are 23% more likely to purchase Tyrrells chips compared to the
+rest of the population' and 'Mainstream young singles/couples are 56% less likely to purchase Burger Rings compared to the rest
+of the population'</p>
+  <p>Comparing my approach with the mark scheme gave me a better appreciation for statistical rigor, such as validating pricing patterns through t-tests and ANOVA, and confirmed how important reproducibility and feature engineering are in real-world retail data projects. These insights will shape how I structure future projects and use R more fluently.</p>
+</section>
+
+  <section id="download-report" class="content-section">
+    <h2>Full Technical Report</h2>
+    <div class="pdf-viewer desktop-only">
+      <iframe src="documents/Quantium_Chips_Report-2.pdf" width="100%" height="500px" style="border: none;"></iframe>
+    </div>
+    <div class="mobile-only">
+      <a href="documents/Quantium_Chips_Report-2.pdf" class="go-back-button" download>
+        📄 Download PDF Report
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <p>© Daniel Mason, 2024</p>
+    </div>
+  </footer>
+  <script src=QT1.js></script>
+</body>
+</html>
