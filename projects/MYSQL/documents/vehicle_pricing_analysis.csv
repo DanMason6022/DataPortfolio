@@ -1,0 +1,43 @@
+vehicle_style,vehicle_size,avg_msrp,avg_pop
+Convertible,Large,486984.64,321.07
+Convertible,Midsize,109162.18,1764.07
+Coupe,Large,107882.80,972.82
+Coupe,Compact,78563.72,1634.52
+Sedan,Large,74285.44,1442.89
+Convertible,Compact,66461.56,1420.23
+Coupe,Midsize,66103.23,1637.83
+"4dr Hatchback",Large,65740.00,3916.00
+"4dr SUV",Large,60104.26,1490.34
+"Convertible SUV",Midsize,43691.67,2009.00
+"Crew Cab Pickup",Large,41919.90,2068.62
+"4dr SUV",Midsize,38393.60,1269.56
+"Passenger Van",Large,35768.11,4020.46
+Wagon,Midsize,29958.80,1436.28
+"4dr Hatchback",Midsize,29940.59,1778.30
+Sedan,Midsize,29618.44,1212.02
+"Crew Cab Pickup",Compact,29515.58,1893.17
+"Passenger Minivan",Midsize,28405.04,1599.98
+Wagon,Large,28208.10,3424.72
+"Passenger Van",Midsize,27827.50,3860.43
+"4dr SUV",Compact,27384.82,1203.07
+"Passenger Minivan",Large,26710.15,1825.18
+"Extended Cab Pickup",Large,25323.19,2374.53
+"Cargo Minivan",Large,23627.67,1061.53
+"Cargo Minivan",Compact,21160.37,3965.22
+Wagon,Compact,20802.65,1061.96
+"4dr Hatchback",Compact,20452.77,1404.38
+"Extended Cab Pickup",Compact,19275.79,1740.77
+"Regular Cab Pickup",Large,18797.87,2422.36
+"Passenger Minivan",Compact,18682.15,2307.84
+Sedan,Compact,18639.05,1450.53
+"Cargo Van",Large,18589.24,3109.00
+"2dr Hatchback",Midsize,18167.22,210.00
+"Cargo Minivan",Midsize,17269.29,3826.14
+"2dr Hatchback",Compact,16753.36,1208.77
+"Cargo Van",Midsize,14655.96,2763.78
+"Convertible SUV",Compact,14393.27,663.88
+"2dr SUV",Midsize,10364.76,3948.18
+"2dr SUV",Compact,9977.79,1193.99
+"Regular Cab Pickup",Compact,9878.58,1489.49
+"Passenger Van",Compact,7573.71,1107.00
+"Cargo Van",Compact,7213.30,1330.20

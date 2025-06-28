@@ -1,0 +1,30 @@
+vehicle_style,transmission_type,avg_msrp
+"2dr Hatchback",AUTOMATIC,20926.46
+"2dr Hatchback",MANUAL,13353.66
+"2dr SUV",AUTOMATIC,18615.20
+"2dr SUV",MANUAL,6303.81
+"4dr Hatchback",AUTOMATIC,23833.68
+"4dr Hatchback",MANUAL,17594.41
+"4dr SUV",AUTOMATIC,41555.19
+"4dr SUV",MANUAL,15426.46
+"Cargo Minivan",AUTOMATIC,20910.86
+"Cargo Van",AUTOMATIC,15280.22
+Convertible,AUTOMATIC,90637.39
+Convertible,MANUAL,62357.76
+"Convertible SUV",AUTOMATIC,38925.50
+"Convertible SUV",MANUAL,9233.14
+Coupe,AUTOMATIC,63852.01
+Coupe,MANUAL,51070.48
+"Crew Cab Pickup",AUTOMATIC,37744.07
+"Crew Cab Pickup",MANUAL,28360.53
+"Extended Cab Pickup",AUTOMATIC,30637.35
+"Extended Cab Pickup",MANUAL,10884.19
+"Passenger Minivan",AUTOMATIC,26392.00
+"Passenger Minivan",MANUAL,4405.33
+"Passenger Van",AUTOMATIC,29015.20
+"Regular Cab Pickup",AUTOMATIC,28536.82
+"Regular Cab Pickup",MANUAL,7557.77
+Sedan,AUTOMATIC,43760.61
+Sedan,MANUAL,17119.23
+Wagon,AUTOMATIC,27613.19
+Wagon,MANUAL,17844.14

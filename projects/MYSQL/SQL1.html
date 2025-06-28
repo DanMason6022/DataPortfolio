@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Pricing SQL Project | Daniel Mason</title>
+  <link rel="stylesheet" href="SQL1.css" />
+</head>
+<body>
+  <nav>
+    <input type="checkbox" id="nav-toggle" hidden>
+    <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
+    <ul class="nav-menu">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="#intro">Project Overview</a></li>
+      <li><a href="#task1">Task 1</a></li>
+      <li><a href="#task2">Task 2</a></li>
+      <li><a href="#task3">Task 3</a></li>
+      <li><a href="#Full-SQL">Full-SQL</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+
+
+      <li><button class="go-back-button" onclick="window.history.back()">Back</button></li>
+    </ul>
+  </nav>
+
+  <header class="hero-section">
+    <h1>Car Pricing SQL Analysis</h1>
+  </header>
+
+  <section class="content-section" id="intro">
+    <h2>Project Context</h2>
+    <p>This self-directed project was a undertaken to simulate a real-world analytics workflow using <strong>MYSQL</strong>, <strong> Tableau Public</strong>,, and a dataset sourced from <strong><a href="https://www.kaggle.com/datasets/CooperUnion/cardataset" target="_blank">Kaggle</a></strong>.</p> 
+    <p>I worked through the dataset as if I were answering questions from a stakeholder, crafting insights I thought might be actionable and therefore useful</p>
+    <p><strong>The hypothetical stakeholder brief:</strong></p>
+    <ul>
+      <li>1. Explore how vehicle style, size, and popularity relate to Manufacturer's Suggested Retail Price (MSRP).</li>
+      <li>2. Identify models that deliver a good power to price ratio.</li>
+      <li>3. Check whether transmission type has a real effect on pricing.</li>
+    </ul>
+  </section>
+
+<section class="content-section" id="task1">
+  <h2>Task 1: Vehicle Style, Size, and Pricing</h2>
+  <p>This task focused on comparing average MSRP and popularity across different vehicle styles and sizes. The goal was to understand how market segments differ in pricing and appeal, and to identify whether higher prices align with greater popularity.</p>
+  <p><em>Note:</em> The popularity metric reflects <strong>brand-level popularity</strong> rather than specific vehicle model popularity. This means that brands with diverse model lineups (e.g., both economy and luxury vehicles) may show inflated or deflated values depending on the model mix. Interpret popularity comparisons with this limitation in mind.</p>
+
+  <h3>SQL Query</h3>
+  <button class="toggle-button" onclick="toggleSQLCode(1)"> Show / Hide SQL Code</button>
+
+  <div id="code-container1" class="code-notebook" style="display: block;">  <pre><code>
+Create temporary table vehicle_summary AS (select 
+c.vehicle_style,
+c.vehicle_size,
+Round(avg(s.msrp),2) as avg_msrp,
+Round(avg(c.popularity),2) as avg_pop
+from car_data.car c
+join car_data.car_specs s on c.car_id = s.car_id
+group by c.vehicle_style, c.vehicle_size
+order by avg_msrp desc);
+
+SELECT *,
+ROUND(100.0 * (RANK() OVER (ORDER BY avg_pop) - 1) / COUNT(*) OVER (), 2) AS popularity_percentile,
+ROUND(100.0 * (RANK() OVER (ORDER BY avg_msrp) - 1) / COUNT(*) OVER (), 2) AS msrp_percentile
+FROM vehicle_summary
+order by popularity_percentile desc;
+  </code></pre>
+</div>
+
+<h3>Sample Output</h3>
+<div class="table-wrapper">
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>vehicle_style</th>
+      <th>vehicle_size</th>
+      <th>avg_msrp</th>
+      <th>avg_pop</th>
+      <th>popularity_percentile</th>
+      <th>msrp_percentile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Passenger Van</td><td>Large</td><td>35768.11</td><td>4020.46</td><td>97.62</td><td>69.05</td></tr>
+    <tr><td>Cargo Minivan</td><td>Compact</td><td>21160.37</td><td>3965.22</td><td>95.24</td><td>40.48</td></tr>
+    <tr><td>2dr SUV</td><td>Midsize</td><td>10364.76</td><td>3948.18</td><td>92.86</td><td>9.52</td></tr>
+    <tr><td>4dr Hatchback</td><td>Large</td><td>65740.00</td><td>3916.00</td><td>90.48</td><td>80.95</td></tr>
+    <tr><td>Passenger Van</td><td>Midsize</td><td>27827.50</td><td>3860.43</td><td>88.10</td><td>52.38</td></tr>
+  </tbody>
+</table>
+
+</div>
+
+<a href="documents/popularity_percentiles.csv" download class="download-btn">
+  Download full CSV
+</a>
+  <div class ="dashboard-scroll-wrapper">
+  <div class="tableauPlaceholder" id="vizTask1" style="position: relative">
+    <noscript>
+      <a href="#"><img alt="Vehicle Style & Size Pricing" src="https://public.tableau.com/static/images/Pr/Price_and_popularity/Priceandpopularity/1.png" style="border: none" /></a>
+    </noscript>
+    <object class="tableauViz" style="display:none;">
+      <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+      <param name="embed_code_version" value="3" />
+      <param name="name" value="Price_and_popularity/Priceandpopularity" />
+      <param name="tabs" value="no" />
+      <param name="toolbar" value="yes" />
+      <param name="static_image" value="https://public.tableau.com/static/images/Pr/Price_and_popularity/Priceandpopularity/1.png" />
+      <param name="animate_transition" value="yes" />
+      <param name="display_static_image" value="yes" />
+      <param name="display_spinner" value="yes" />
+      <param name="display_overlay" value="yes" />
+      <param name="display_count" value="yes" />
+      <param name="language" value="en-US" />
+    </object>
+  </div>
+  </div>
+  
+  <h3>Popularity Distribution Chart:</h3>
+
+  <div class="dashboard-scroll-wrapper">
+        <div class="tableauPlaceholder">
+  <iframe 
+    src="documents/popularity_distribution.html" 
+  style="width: 1200px; height: 600px; border: none;" >
+  </iframe>
+  </div>
+</div>
+
+  <h3>MSRP Distribution Chart:</h3>
+
+<div class="dashboard-scroll-wrapper">
+    <div class="tableauPlaceholder">
+  <iframe 
+    src="documents/msrp_distribution.html" 
+  style="width: 1200px; height: 600px; border: none;" >
+  </iframe>
+  </div>
+</div>
+
+
+  <h3>Findings & Insights</h3>
+<div class="feature-box">
+  <p><strong>Luxury Segments Show High Price, Low Popularity:</strong> The "Convertible / Large" category averages $486,985 — the highest MSRP in the dataset, landing in the 97th percentile. However, it ranks in just the 2nd percentile for popularity, suggesting it appeals to a niche market rather than broad consumer demand.</p>
+
+  <p><strong>Similar Trends in Large Coupes:</strong> The "Coupe / Large" segment follows a similar pattern, with an average MSRP of $107,883 (93rd percentile) and popularity in the bottom 8%. These vehicles may justify their price through exclusivity or design, but they don't drive volume interest.</p>
+
+  <p><strong>Affordable Models Dominate Popularity Rankings:</strong> Styles like "Cargo Minivan / Compact" and "2dr SUV / Midsize" average just $21K and $10K, respectively, yet both sit in the top 10% for popularity. These segments clearly offer strong value and market appeal.</p>
+
+  <p><strong>Functional Utility Segments Perform Well:</strong> Practical vehicle types like "Passenger Van / Midsize" and "Cargo Van / Large" also show high popularity (above the 80th percentile) with mid-tier pricing. Their success likely reflects commercial or family utility.</p>
+
+  <p><strong>Actionable Insight:</strong> Models like Compact Cargo Minivans and Midsize 2-door SUVs deliver high popularity at low cost — making them strong candidates for aggressive pricing strategies, inventory prioritization, or fleet sales. Meanwhile, niche segments like Large Convertibles, despite their high prices, show low interest and may require exclusivity-focused marketing or production limits to remain viable.</p>
+</div>
+
+
+</section>
+
+<section class="content-section" id="task2">
+  <h2>Task 2: High-Performance Value (HP per $1K)</h2>
+  <p>This analysis aimed to identify which vehicles offer the most power for the price. By calculating horsepower per $1,000 of MSRP, I could highlight models that deliver strong value, and contrast them with those where branding or luxury factors likely drive up costs without proportional gains in horsepower.</p>
+    <h3>SQL Query</h3>
+  <button class="toggle-button" onclick="toggleSQLCode('code2')"> Show / Hide SQL Code</button>
+
+  <div id="code-container2" class="code-notebook" style="display: block;"><pre><code>
+SELECT 
+  c.make,
+  c.model, 
+  c.vehicle_style,
+  c.year, 
+  s.engine_hp, 
+  s.msrp, 
+  ROUND(s.engine_hp / (s.msrp / 1000), 2) AS hp_per_1000$
+FROM car_data.car c
+JOIN car_data.car_specs s ON c.car_id = s.car_id
+WHERE s.msrp > 0
+ORDER BY hp_per_1000$ DESC;
+</code></pre>
+</div>
+
+<h3>Sample Output</h3>
+<div class="table-wrapper">
+<table>
+  <thead>
+    <tr>
+      <th>Make</th><th>Model</th><th>Style</th><th>Year</th>
+      <th>HP</th><th>MSRP</th><th>HP per $1K</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Dodge</td><td>Charger</td><td>Sedan</td><td>2012</td><td>370</td><td>15000</td><td>24.67</td></tr>
+    <tr><td>Ford</td><td>Mustang</td><td>Coupe</td><td>2010</td><td>300</td><td>14000</td><td>21.43</td></tr>
+    <tr><td>Chevy</td><td>Camaro</td><td>Coupe</td><td>2011</td><td>426</td><td>22000</td><td>19.36</td></tr>
+  </tbody>
+</table>
+</div>
+
+<a href="documents/vehicle_hp_per_1000$.csv" download class="download-btn">Download full CSV</a>
+  <div class ="dashboard-scroll-wrapper">
+    <div class="tableauPlaceholder" id="vizTask2" style="position: relative">
+    <noscript>
+      <a href="#"><img alt="HP per Dollar Analysis" src="https://public.tableau.com/static/images/6M/6MBKTSH3Q/1.png" style="border: none" /></a>
+    </noscript>
+    <object class="tableauViz" style="display:none;">
+      <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+      <param name="embed_code_version" value="3" />
+      <param name="path" value="shared/6MBKTSH3Q" />
+      <param name="tabs" value="no" />
+      <param name="toolbar" value="yes" />
+      <param name="static_image" value="https://public.tableau.com/static/images/6M/6MBKTSH3Q/1.png" />
+      <param name="animate_transition" value="yes" />
+      <param name="display_static_image" value="yes" />
+      <param name="display_spinner" value="yes" />
+      <param name="display_overlay" value="yes" />
+      <param name="display_count" value="yes" />
+      <param name="language" value="en-GB" />
+    </object>
+  </div>
+  </div>
+<h3>Findings & Insights</h3>
+ <div class="feature-box">
+    <p><strong>Affordable Muscle Delivers Best Value:</strong> Sedans and Coupes from mainstream brands like Dodge, Ford, and Chevrolet consistently ranked at the top, delivering over 20 horsepower per $1K. The 2012 Dodge Charger, for example, offered 24.67 HP/$1K — one of the best ratios in the dataset.</p>
+    <p><strong>Luxury ≠ Performance Efficiency:</strong> Hypercars like the Bugatti Veyron, with MSRPs over $2 million and HP per $1K below 1, show how performance can plateau while price continues to climb. These models offer prestige, not practical value.</p>
+    <p><strong>Segment Your Benchmarks:</strong> Trying to compare mainstream and luxury models under one value metric distorts the insights. It's clear that high-value performance should be benchmarked separately by category.</p>
+    <p><strong>Actionable Insight:</strong> Promote older performance sedans and coupes as high-value options for enthusiasts or budget-conscious drivers, and avoid using HP/$1K as a marketing metric for premium or exotic segments.</p>
+  </div>
+
+
+</section>
+
+<section class="content-section" id="task3">
+  <h2>Task 3: Transmission Type and Price</h2>
+  <p>This task explored how transmission type, manual or automatic, impacts average vehicle pricing. I grouped MSRP data by transmission and style, then used statistical testing to evaluate whether observed differences in pricing were likely due to preference trends or random chance.</p>
+  <h3>SQL Query</h3>
+  <button class="toggle-button" onclick="toggleSQLCode('code3')"> Show / Hide SQL Code</button>
+
+  <div id="code-container3" class="code-notebook" style="display: block;">
+<pre><code>
+SELECT 
+  c.vehicle_style,
+  c.transmission_type,
+  ROUND(AVG(s.msrp), 2) AS avg_msrp
+FROM car c
+JOIN car_specs s ON c.car_id = s.car_id
+WHERE c.transmission_type IN ('MANUAL', 'AUTOMATIC')
+GROUP BY c.vehicle_style, c.transmission_type
+ORDER BY c.vehicle_style, avg_msrp DESC;
+</code></pre>
+</div>
+
+<h3>Sample Output</h3>
+<div class="table-wrapper">
+
+<table>
+  <thead>
+    <tr>
+      <th>Style</th><th>Transmission</th><th>Avg MSRP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Coupe</td><td>AUTOMATIC</td><td>38000</td></tr>
+    <tr><td>Coupe</td><td>MANUAL</td><td>32000</td></tr>
+    <tr><td>Sedan</td><td>AUTOMATIC</td><td>34000</td></tr>
+    <tr><td>Sedan</td><td>MANUAL</td><td>29500</td></tr>
+  </tbody>
+</table>
+</div>
+
+<a href="documents/transmission_vs_price.csv" download class="download-btn">Download full CSV</a>
+  <div class="dashboard-scroll-wrapper">
+  <div class='tableauPlaceholder' id='vizTask3' style='position: relative'>
+    <noscript>
+      <a href='#'>
+        <img alt='Transmission Vs Price' src='https://public.tableau.com/static/images/Tr/Tranmission_vs_price/TransmissionVsPrice/1.png' style='border: none' />
+      </a>
+    </noscript>
+    <object class='tableauViz' style='display:none;'>
+      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+      <param name='embed_code_version' value='3' />
+      <param name='site_root' value='' />
+      <param name='name' value='Tranmission_vs_price/TransmissionVsPrice' />
+      <param name='tabs' value='no' />
+      <param name='toolbar' value='yes' />
+      <param name='static_image' value='https://public.tableau.com/static/images/Tr/Tranmission_vs_price/TransmissionVsPrice/1.png' />
+      <param name='animate_transition' value='yes' />
+      <param name='display_static_image' value='yes' />
+      <param name='display_spinner' value='yes' />
+      <param name='display_overlay' value='yes' />
+      <param name='display_count' value='yes' />
+      <param name='language' value='en-GB' />
+      <param name='filter' value='publish=yes' />
+    </object>
+  </div>
+  </div>
+  <h3>Findings & Insights</h3>
+ <div class="feature-box">
+    <p><strong>Automatics Cost More Across the Board:</strong> In almost every vehicle style, automatics carried a price premium — often $5K to $12K more than their manual counterparts. Coupes and Sedans showed particularly large gaps.</p>
+    <p><strong>Statistically Significant Difference:</strong> A t-test showed a p-value of ~0.039, indicating that the difference in pricing is unlikely due to random chance. Consumer preference, especially in the U.S., likely explains this pricing trend.</p>
+    <p><strong>Manuals Are Niche But Undervalued:</strong> In styles like 2-door SUVs, manuals averaged ~$6.3K versus ~$18.6K for automatics — nearly a 3x price difference. This suggests manuals may present an opportunity for budget-focused buyers or driving enthusiasts.</p>
+    <p><strong>Actionable Insight:</strong> Consider positioning manual models as value options within targeted segments, especially where price sensitivity or enthusiast appeal matters. For automatics, lean into convenience and resale messaging.</p>
+  </div>
+
+</section>
+<section class="content-section" id="Full-SQL"> 
+  <h2>Full SQL Queries</h2>
+
+  <!-- First SQL Block -->
+  <div class="sql-block">
+    <div class="sql-controls">
+      <button class="toggle-button" onclick="toggleSQLCode('code5')">Show / Hide SQL Code</button>
+      <a href="documents/SQL_code.sql" download class="download-btn">Download car_data_table_creation.sql</a>
+    </div>
+    <div id="code-container5" class="code-notebook" style="display: block;">
+      <pre><code id="SQL-code2">Loading SQL file...</code></pre>
+    </div>
+  </div>
+
+  <!-- Second SQL Block -->
+  <div class="sql-block">
+    <div class="sql-controls">
+      <button class="toggle-button" onclick="toggleSQLCode('code4')">Show / Hide SQL Code</button>
+      <a href="documents/car_data_table_creation.sql" download class="download-btn">Download SQL_code.sql</a>
+    </div>
+    <div id="code-container4" class="code-notebook" style="display: block;">
+      <pre><code id="SQL-code1">Loading SQL file...</code></pre>
+    </div>
+  </div>
+
+    <h2>Summary of SQL Techniques & Learning</h2>
+    <div class="feature-box" >
+      <p><strong>Relational Structure:</strong> I kept things organized by splitting the data into two tables — one for descriptive info like car model and one for numeric specs like horsepower and MSRP.</p>
+      <p><strong>Data Prep:</strong> I used a staging table to clean things up before inserting data into the main tables. It helped catch small issues before they could snowball.</p>
+      <p><strong>Joins & Aggregates:</strong> Most of my queries combined the tables using joins, and I leaned heavily on `GROUP BY` with averages or counts to explore the trends.</p>
+      <p><strong>Metrics & Categoricals:</strong> I built out new metrics like horsepower per $1K and explored how things like transmission type affected pricing.</p>
+      <p><strong>Curiosity-Driven Extras:</strong> I also poked around in the data beyond the original tasks — checking out things like door counts or popularity extremes just to see what else was there.</p>
+    </div>
+
+    <h2>Reflection: What I’d Do Differently Next Time</h2>
+    <div class="feature-box" id="reflection">
+      <p><strong>Follow SQL conventions with greater consistency:</strong> I'd go for more readable names and avoid special characters like `$` in field names. Makes things easier down the line.</p>
+      <p><strong>Comment with Purpose:</strong> I added some comments, but not always to the level of detail that might be helpful. I'd be more intentional about leaving notes for others (or future me).</p>
+      <p><strong>More exploration:</strong> This dataset definitely has more to offer but due to the closed off nature of the task I only completed the queries relating to pricing, in future a project on the economic / ecological potential e.g. Miles per gallon could be explored, perphaps in relation to the horsepower  </p>
+    </div>
+</section>
+
+</section>
+
+ 
+ <footer>
+    <p>© Daniel Mason, 2024</p>
+  </footer>
+
+<script src="SQL1.js"></script>
+</body>
+</html>

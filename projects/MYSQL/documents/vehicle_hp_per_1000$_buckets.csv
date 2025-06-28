@@ -1,0 +1,6 @@
+hp_per_1k_bucket,model_count
+"Under 5 HP/$1K",1261
+"5-10 HP/$1K",8311
+"11-20 HP/$1K",210
+"21-30 HP/$1K",3
+"Over 30 HP/$1K",2030
