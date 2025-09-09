@@ -1,0 +1,54 @@
+class robot:
+    def __init__ 'self,name,grid,position':
+    self.y = y
+    self.x= x 
+    self.direction = "North"
+
+    self.directions = ["NORTH", "EAST", "SOUTH", "WEST"]
+
+    def move_forward(self):
+    """Move robot one step forward depending on its current direction"""
+    if self.direction == "NORTH":
+        self.y += 1
+    elif self.direction == "SOUTH":
+        self.y -= 1
+    elif self.direction == "EAST":
+        self.x += 1
+    elif self.direction == "WEST":
+        self.x -= 1
+
+    def turn_left(self)
+    idx = self.direction.index
+    self.direction = self.directions[(idx - 1) % 4]
+
+    def turn_right(self):
+        """Rotate robot 90 degrees right"""
+        idx = self.directions.index(self.direction)
+        self.direction = self.directions[(idx + 1) % 4]
+
+    def __str__(self):
+        return f"Robot is at ({self.x}, {self.y}), facing {self.direction}"
+
+    def display_grid(robot, size=10):
+    for y in range(size, -size-1, -1):  # draw top to bottom
+        row = ""
+        for x in range(-size, size+1):
+            if x == robot.x and y == robot.y:
+                if robot.direction == "NORTH":
+                    row += " ↑ "
+                elif robot.direction == "SOUTH":
+                    row += " ↓ "
+                elif robot.direction == "EAST":
+                    row += " → "
+                elif robot.direction == "WEST":
+                    row += " ← "
+            else:
+                row += " . "
+        print(row)
+    print()
+
+
+r = Robot()
+display_grid(r)       # shows robot at (0,0)
+r.move_forward()
+display_grid(r)       # robot moved up one
